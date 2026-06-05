@@ -1,0 +1,133 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Entrar | FluentU Clone</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{% static 'css/base.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'css/login.css' %}">
+
+</head>
+
+<body>
+
+    <div class="login-wrapper">
+
+        <div class="login-card">
+
+            <div class="logo">
+
+                🔥 FluentU Clone
+
+            </div>
+
+            <h1>
+                Bem-vindo de volta
+            </h1>
+
+            <p class="subtitle">
+                Entre para continuar seus estudos.
+            </p>
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+
+                <div class="error">
+
+                    {{ form.non_field_errors.0 }}
+
+                </div>
+
+                {% endif %}
+
+                {% if form.username.errors %}
+
+                <div class="error">
+
+                    {{ form.username.errors.0 }}
+
+                </div>
+
+                {% endif %}
+
+                <div class="input-group">
+
+                    {{ form.username }}
+
+                </div>
+
+                {% if form.password.errors %}
+
+                <div class="error">
+
+                    {{ form.password.errors.0 }}
+
+                </div>
+
+                {% endif %}
+
+                <div class="input-group">
+
+                    {{ form.password }}
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="login-btn">
+
+                    Entrar
+
+                </button>
+
+            </form>
+
+            <div class="signup">
+
+                Ainda não possui conta?
+
+                <a href="/register/">
+
+                    Criar conta
+
+                </a>
+
+            </div>
+
+            <div class="signup">
+
+                <a href="/">
+
+                    ← Voltar para página inicial
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

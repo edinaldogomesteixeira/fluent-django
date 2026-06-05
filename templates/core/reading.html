@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FluentU Clone - Reading</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --blue:#2563eb;
+    --green:#22c55e;
+    --yellow:#facc15;
+    --gray:#64748b;
+    --border:#e5e7eb;
+    --bg:#f8fafc;
+}
+
+html,
+body{
+    height:100%;
+    
+    overflow-x:hidden;
+}
+
+.container{
+    width:100%;
+    max-width:none;
+    padding:32px 40px;
+}
+
+.main-content{
+    height:calc(100vh - 160px);
+}
+
+.back-link{
+    font-weight:600;
+    margin-bottom:24px;
+    cursor:pointer;
+}
+
+.lesson-header{
+    display:flex;
+    gap:24px;
+    align-items:center;
+}
+
+.thumb{
+    width:240px;
+    height:140px;
+    border-radius:16px;
+    object-fit:cover;
+}
+
+.lesson-info{
+    flex:1;
+}
+
+.lesson-info h1{
+    font-size:48px;
+    margin-bottom:10px;
+}
+
+.lesson-meta{
+    color:var(--gray);
+    margin-bottom:10px;
+}
+
+.lesson-description{
+    color:var(--gray);
+}
+
+.header-actions{
+    display:flex;
+    gap:12px;
+}
+
+.icon-btn{
+    width:44px;
+    height:44px;
+    border:none;
+    border-radius:12px;
+    background:white;
+    cursor:pointer;
+    font-size:18px;
+    box-shadow:0 1px 2px rgba(0,0,0,.05);
+}
+
+.tabs{
+    margin-top:32px;
+    display:flex;
+    align-items:center;
+    gap:32px;
+    border-bottom:1px solid var(--border);
+    padding-bottom:14px;
+}
+
+.tab{
+    text-decoration:none;
+    color:#64748b;
+    font-weight:600;
+}
+
+.tab.active{
+    color:var(--blue);
+}
+
+.progress-area{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.progress-bar{
+    width:180px;
+    height:8px;
+    background:#e5e7eb;
+    border-radius:999px;
+}
+
+.progress-fill{
+    width:75%;
+    height:100%;
+    background:var(--green);
+    border-radius:999px;
+}
+
+.layout{
+    display:flex;
+    grid-template-columns:minmax(0,1fr) 360px;
+    gap:24px;
+}
+
+
+.reading-panel{
+    flex:1;
+    min-width:0;
+}
+
+.reading-text{
+    flex:1;
+    max-width:900px;
+}
+
+.reading-text p{
+    font-size:18px;
+    line-height:2;
+    margin-bottom:8px;
+}
+
+.word{
+    cursor:pointer;
+    padding:3px 8px;
+    border-radius:8px;
+    transition:.2s;
+}
+
+.word:hover{
+    transform:translateY(-2px);
+}
+
+.new{
+    background:#dbeafe;
+}
+
+.learning{
+    background:#fef3c7;
+}
+
+.known{
+    background:#dcfce7;
+}
+
+.selected{
+    outline:3px solid var(--blue);
+}
+
+.legend{
+    display:flex;
+    gap:18px;
+     margin-top:auto;
+    margin-bottom:25px;
+}
+
+.legend-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:14px;
+}
+
+.dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+}
+
+.dot-blue{
+    background:#60a5fa;
+}
+
+.dot-yellow{
+    background:#facc15;
+}
+
+.dot-green{
+    background:#22c55e;
+}
+
+.dot-gray{
+    background:#d1d5db;
+}
+
+.toolbar{
+    margin-top:auto;
+    padding-top:20px;
+
+    position:sticky;
+    bottom:0;
+
+    background:white;
+}
+
+.secondary-btn{
+    padding:12px 18px;
+    border:none;
+    border-radius:12px;
+    background:#f1f5f9;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.play-btn{
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    border:none;
+    background:#0f172a;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.sidebar{
+    height:100%;
+    overflow-y:auto;
+}
+
+.vocab-panel{
+    background:white;
+    border-radius:20px;
+    padding:24px;
+    box-shadow:0 1px 3px rgba(0,0,0,.05);
+}
+
+.vocab-panel h3{
+    margin-bottom:20px;
+}
+
+.stats{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+    font-size:13px;
+}
+
+.word-list{
+    list-style:none;
+}
+
+.word-list li{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 0;
+    border-bottom:1px solid #f1f5f9;
+}
+
+.word-list small{
+    display:block;
+    color:#64748b;
+    margin-top:3px;
+}
+
+.badge{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-weight:700;
+}
+
+.badge-green{
+    background:#22c55e;
+}
+
+.badge-blue{
+    background:#3b82f6;
+}
+
+.badge-yellow{
+    background:#facc15;
+    color:#111827;
+}
+
+.popup{
+    width:260px;
+    flex-shrink:0;
+}
+
+.popup-header{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+}
+
+.popup h2{
+    font-size:32px;
+}
+
+.ipa{
+    color:#64748b;
+    margin-bottom:15px;
+}
+
+.translation{
+    font-size:22px;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+.level{
+    color:var(--green);
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.example{
+    background:#f8fafc;
+    border-radius:12px;
+    padding:16px;
+    margin-bottom:20px;
+}
+
+.level-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.level-buttons button{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.level-buttons button.active{
+    background:#22c55e;
+    color:white;
+    font-weight:bold;
+}
+
+@media(max-width:1100px){
+
+.layout{
+    grid-template-columns:1fr 480px;
+}
+
+.sidebar{
+    min-width:480px;
+    order:-1;
+}
+
+.reading-text p{
+    font-size:24px;
+}
+
+.lesson-info h1{
+    font-size:32px;
+}
+
+.lesson-header{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="back-link">← Back to Explore</div>
+
+    <div class="lesson-header">
+
+        <img
+            class="thumb"
+            src="https://picsum.photos/800/450"
+            alt="thumbnail">
+
+        <div class="lesson-info">
+
+            <h1>Harry Local</h1>
+
+            <div class="lesson-meta">
+                Intermediate • 100 Words
+            </div>
+
+            <div class="lesson-description">
+                Learn English with real videos.
+            </div>
+
+        </div>
+
+        <div class="header-actions">
+            <button class="icon-btn">Aa</button>
+            <button class="icon-btn">🔊</button>
+            <button class="icon-btn">⋯</button>
+        </div>
+
+    </div>
+
+    <div class="tabs">
+
+        <a class="tab">Dialogue</a>
+        <a class="tab active">Reading</a>
+        <a class="tab">Listen</a>
+        <a class="tab">Review</a>
+
+        <div class="progress-area">
+
+            <span>75% of lesson</span>
+
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="layout">
+
+        <div class="reading-panel">
+
+            <div class="reading-text">
+
+                <p>
+                    Hi
+                    <span class="word learning">everyone</span>,
+                    my
+                    <span class="word new">name</span>
+                    is
+                    <span class="word learning">Courtney</span>
+                    and today I'm going to talk about my
+                    <span class="word new">experience</span>
+                    <span class="word known">playing</span>
+                    <span class="word known">basketball</span>.
+                </p>
+
+                <p>
+                    Basketball was one of my favorite sports growing up.
+                    I played
+                    <span class="word new">basketball</span>
+                    starting in middle school.
+                </p>
+
+                <p>
+                    I was on several different basketball teams throughout
+                    middle school and high school.
+                </p>
+
+                <p>
+                    My experience playing basketball was a bit of a roller coaster.
+                    My team was never very good.
+                </p>
+
+            </div>
+
+            <div class="legend">
+
+                <div class="legend-item">
+                    <div class="dot dot-blue"></div>
+                    New
+                </div>
+
+                <div class="legend-item">
+                    <div class="dot dot-yellow"></div>
+                    Learning
+                </div>
+
+                <div class="legend-item">
+                    <div class="dot dot-green"></div>
+                    Known
+                </div>
+
+                <div class="legend-item">
+                    <div class="dot dot-gray"></div>
+                    Mastered
+                </div>
+
+            </div>
+
+            <div class="toolbar">
+
+                <button class="secondary-btn">
+                    Translate All
+                </button>
+
+                <label>
+                    <input type="checkbox">
+                    Bilingual (EN + PT)
+                </label>
+
+                <button class="play-btn">
+                    ▶
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="sidebar">
+
+            <div class="popup">
+
+                <div class="popup-header">
+                    <h2>walking</h2>
+                    ✕
+                </div>
+
+                <div class="ipa">
+                    /ˈwɔːkɪŋ/
+                </div>
+
+                <div class="translation">
+                    andando, caminhando
+                </div>
+
+                <div class="level">
+                    Nível 4 • Conhecido
+                </div>
+
+                <div class="example">
+                    <strong>The man is walking forwards.</strong>
+                    <br><br>
+                    O homem está caminhando para frente.
+                </div>
+
+                <div class="level-buttons">
+
+                    <button>1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button class="active">4</button>
+                    <button>5</button>
+
+                </div>
+
+            </div>
+
+           
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+document.querySelectorAll('.word').forEach(word => {
+
+    word.addEventListener('click', () => {
+
+        document.querySelectorAll('.word')
+            .forEach(w => w.classList.remove('selected'));
+
+        word.classList.add('selected');
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

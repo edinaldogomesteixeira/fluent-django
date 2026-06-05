@@ -1,0 +1,359 @@
+.vocab-popup {
+
+    position: fixed;
+
+    display: none;
+
+    z-index: 999999;
+}
+
+
+/* ACTIVE */
+
+.vocab-popup.active {
+
+    display: block;
+
+    animation:
+        popupFade 0.18s ease;
+}
+
+
+/* CARD */
+
+.vocab-popup-card {
+
+    width: 340px;
+
+    background: #f8f8f8;
+
+    border-radius: 26px;
+
+    padding: 22px;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.12);
+
+    position: relative;
+}
+
+
+/* CLOSE BUTTON */
+
+.popup-close {
+
+    position: absolute;
+
+    top: 14px;
+
+    right: 14px;
+
+    border: none;
+
+    background: none;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    color: #9ca3af;
+
+    transition: 0.18s;
+}
+
+.popup-close:hover {
+
+    transform: scale(1.08);
+
+    color: #111827;
+}
+
+
+/* WORD */
+
+.popup-word {
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    color: #111827;
+
+    margin-bottom: 4px;
+
+    line-height: 1.1;
+
+    letter-spacing: -0.5px;
+}
+
+
+/* IPA */
+
+.popup-ipa {
+
+    font-size: 14px;
+
+    color: #6b7280;
+
+    font-style: italic;
+
+    margin-bottom: 10px;
+}
+
+
+/* TRANSLATION */
+
+.popup-translation {
+
+    font-size: 18px;
+
+    font-weight: 500;
+
+    color: #374151;
+
+    margin-bottom: 12px;
+}
+
+
+/* DEFINITION */
+
+.popup-definition {
+
+    line-height: 1.7;
+
+    color: #374151;
+
+    margin-bottom: 30px;
+
+    font-size: 16px;
+}
+
+
+/* LEVEL CONTAINER */
+
+.knowledge-levels {
+
+    display: flex;
+
+    gap: 12px;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-top: 8px;
+}
+
+/* BUTTONS */
+
+.knowledge-button {
+
+    width: 44px;
+
+    height: 44px;
+
+    min-width: 44px;
+
+    min-height: 44px;
+
+    max-width: 44px;
+
+    max-height: 44px;
+
+    border-radius: 50%;
+
+    border: 2px solid #d1d5db;
+
+    background: #fafafa;
+
+    color: #374151;
+
+    font-size: 22px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: all 0.18s ease;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0;
+
+    line-height: 1;
+
+    flex-shrink: 0;
+}
+
+
+/* HOVER */
+
+.knowledge-button:hover {
+
+    border-color: #9ca3af;
+
+    background: white;
+
+    transform: translateY(-1px);
+}
+
+/* ACTIVE */
+
+/* LEVEL 1 */
+
+.knowledge-button[data-level="1"].active {
+
+    background: #f6dd7b;
+
+    border-color: #d9c062;
+
+    color: #111827;
+}
+
+
+/* LEVEL 2 */
+
+.knowledge-button[data-level="2"].active {
+
+    background: #f5f1dd;
+
+    border-color: #d8d2b6;
+
+    color: #111827;
+}
+
+
+/* LEVEL 3 */
+
+.knowledge-button[data-level="3"].active {
+
+    background: #f3eed8;
+
+    border-color: #d7cfb1;
+
+    color: #111827;
+}
+
+
+/* LEVEL 4 */
+
+.knowledge-button[data-level="4"].active {
+
+    background: #d6d9df;
+
+    border-color: #b7bcc5;
+
+    color: #1f2937;
+}
+
+
+/* LEVEL 5 */
+
+.knowledge-button[data-level="5"].active {
+
+    background: #cfe9cf;
+
+    border-color: #67b567;
+
+    color: #1f2937;
+}
+
+/* DELETE */
+
+.knowledge-button.delete {
+
+    font-size: 18px;
+
+    color: #6b7280;
+
+    background: #fafafa;
+
+    border-color: #d1d5db;
+}
+
+
+.knowledge-button.delete:hover {
+
+    background: #f3f4f6;
+
+    border-color: #9ca3af;
+
+    color: #374151;
+}
+
+
+/* SUCCESS */
+
+.knowledge-button.success {
+
+    font-size: 28px;
+
+    font-weight: 300;
+}
+
+
+/* ANIMATION */
+
+@keyframes popupFade {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(8px)
+            scale(0.96);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+/* POPUP ARROW */
+
+.vocab-popup::after {
+
+    content: '';
+
+    position: absolute;
+
+    bottom: -10px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 0;
+    height: 0;
+
+    border-left: 10px solid transparent;
+
+    border-right: 10px solid transparent;
+
+    border-top: 10px solid white;
+}
+
+
+/* POPUP BELOW WORD */
+
+.vocab-popup.bottom-position::after {
+
+    top: -10px;
+
+    bottom: auto;
+
+    border-top: none;
+
+    border-bottom:
+        10px solid white;
+}

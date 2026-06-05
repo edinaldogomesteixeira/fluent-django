@@ -1,0 +1,231 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FluentU Clone</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{% static 'css/base.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'css/landing.css' %}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="container nav-container">
+
+            <div class="logo">
+
+                <i class="fa-solid fa-fire-flame-simple"></i>
+
+                <span>FluentU Clone</span>
+
+            </div>
+
+            <nav class="nav">
+
+                <a href="#features">
+                    Recursos
+                </a>
+
+                <a href="#hero">
+                    Como funciona
+                </a>
+
+                <a href="#">
+                    Preços
+                </a>
+
+                <a href="/accounts/login/">
+                    Login
+                </a>
+
+                <a href="/register/"
+                   class="nav-cta">
+
+                    Comece agora
+
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+    <!-- HERO -->
+
+    <section id="hero"
+             class="hero">
+
+        <div class="container hero-grid">
+
+            <div class="hero-content">
+
+                <h1>
+
+                    Aprenda idiomas
+
+                    <br>
+
+                    com vídeos reais
+
+                </h1>
+
+                <p>
+
+                    Assista a vídeos autênticos,
+                    aprenda vocabulário no contexto
+                    e melhore sua compreensão.
+
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="/register/"
+                       class="btn-primary btn-large">
+
+                        Comece agora
+
+                    </a>
+
+                    <a href="/accounts/login/"
+                       class="btn-secondary btn-large">
+
+                        Login
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="hero-media">
+
+                <div class="laptop">
+
+                    <img src="https://images.unsplash.com/photo-1542831371-d531d36971e6"
+                         alt="Video">
+
+                    <div class="video-overlay">
+
+                        <h3>
+
+                            I like these vegetables.
+
+                        </h3>
+
+                        <p>
+
+                            Eu gosto desses vegetais.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FEATURES -->
+
+    <section id="features"
+             class="features">
+
+        <div class="container">
+
+            <div class="features-grid">
+
+                <div class="feature-card">
+
+                    <i class="fa-regular fa-circle-play"></i>
+
+                    <h4>
+                        Vídeos Reais
+                    </h4>
+
+                    <p>
+                        Conteúdo autêntico do YouTube com legendas.
+                    </p>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <i class="fa-solid fa-language"></i>
+
+                    <h4>
+                        Vocabulário
+                    </h4>
+
+                    <p>
+                        Aprenda palavras no contexto certo.
+                    </p>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <i class="fa-regular fa-comments"></i>
+
+                    <h4>
+                        Diálogo
+                    </h4>
+
+                    <p>
+                        Acompanhe as frases e entenda melhor.
+                    </p>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <i class="fa-solid fa-arrows-rotate"></i>
+
+                    <h4>
+                        Revisão
+                    </h4>
+
+                    <p>
+                        Reforce o que aprendeu e memorize.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <script src="{% static 'js/landing.js' %}"></script>
+
+</body>
+
+</html>

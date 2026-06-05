@@ -1,0 +1,152 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Objetivo</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/base.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'css/goal.css' %}">
+
+</head>
+
+<body>
+
+    <main class="goal-page">
+
+        <div class="goal-card">
+
+            <div class="logo">
+                🔥 FluentU Clone
+            </div>
+
+            <h1>
+                Qual é o seu objetivo?
+            </h1>
+
+            <p class="subtitle">
+                Isso nos ajuda a personalizar sua experiência.
+            </p>
+
+            <form
+                method="post"
+                action="/onboarding/save-goal/">
+
+                {% csrf_token %}
+
+                <input
+                    type="hidden"
+                    id="goal"
+                    name="goal">
+
+                <div class="goal-options">
+
+                    <div
+                        class="goal-option"
+                        data-goal="travel">
+
+                        ✈️
+                        <span>Viagem</span>
+
+                    </div>
+
+                    <div
+                        class="goal-option"
+                        data-goal="work">
+
+                        💼
+                        <span>Trabalho</span>
+
+                    </div>
+
+                    <div
+                        class="goal-option"
+                        data-goal="study">
+
+                        📚
+                        <span>Estudos</span>
+
+                    </div>
+
+                    <div
+                        class="goal-option"
+                        data-goal="personal">
+
+                        ❤️
+                        <span>Interesse pessoal</span>
+
+                    </div>
+
+                </div>
+
+                <button
+                    id="continueBtn"
+                    class="continue-btn"
+                    disabled>
+
+                    Continuar
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <script>
+
+        const options =
+            document.querySelectorAll(
+                '.goal-option'
+            );
+
+        const button =
+            document.getElementById(
+                'continueBtn'
+            );
+
+        const input =
+            document.getElementById(
+                'goal'
+            );
+
+        options.forEach(option => {
+
+            option.addEventListener(
+                'click',
+                () => {
+
+                    options.forEach(
+                        item => item.classList.remove(
+                            'selected'
+                        )
+                    );
+
+                    option.classList.add(
+                        'selected'
+                    );
+
+                    input.value =
+                        option.dataset.goal;
+
+                    button.disabled = false;
+                }
+            );
+        });
+
+    </script>
+
+</body>
+
+</html>

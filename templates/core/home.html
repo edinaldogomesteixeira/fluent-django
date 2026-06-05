@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FluentU Clone
+    </title>
+
+    <!-- ICONS -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <!-- FONTS -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- GLOBAL TOPBAR -->
+        {% include 'components/topbar.html' %}
+        
+
+        <!-- APP BODY -->
+
+        <div class="app-body">
+
+            <!-- SIDEBAR -->
+            {% include 'components/sidebar.html' %}
+            
+
+            <!-- MAIN CONTENT -->
+
+            <main class="main-content">
+
+                <!-- DYNAMIC VIEW -->
+
+                <section
+                    id="mainContent"
+                    class="content"
+                >
+
+                </section>
+
+            </main>
+
+        </div>
+
+    </div>
+
+    <!-- VIDEO MODAL -->
+    {% include 'components/modal.html' %}
+  
+    <!-- IMPORT VIDEO MODAL -->
+    {% include 'components/import_video_modal.html' %}
+
+    <!-- VOCAB POPUP -->
+    {% include 'components/vocab-popup.html' %}
+    
+
+
+    <!-- LIBRARIES -->
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <!-- APP -->
+
+    <script src="/static/js/router.js"></script>
+    <script src="/static/js/topbar.js"></script>
+    
+    <script src="/static/js/video-card.js"></script>
+    <script src="/static/js/video-service.js"></script>
+    <script src="/static/js/media/media-controller.js"></script>
+    <script src="/static/js/modal-controller.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/dashboard.js"></script>
+
+    <script src="/static/js/import-video.js"></script>
+
+   
+
+
+</body>
+
+</html>

@@ -1,0 +1,675 @@
+:root {
+
+    --content-width: 900px;
+
+}
+
+/* =========================================
+   VIDEO PAGE
+========================================= */
+
+.video-page {
+
+    height: calc(100vh - 72px);
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+}
+
+.video-fixed-header > * {
+
+    max-width: var(--content-width);
+
+    margin: 0 auto;
+
+}
+
+.video-scroll-content {
+
+    flex: 1;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    padding-top: 15px;
+
+}
+
+/* =========================================
+   BACK
+========================================= */
+
+.video-back {
+
+    margin-bottom: 15px;
+}
+
+.back-button {
+ 
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    background: none;
+
+    border: none;
+
+    padding: 0;
+
+    margin-bottom: 18px;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    color: #111827;
+
+    line-height: 3;
+
+}
+
+.back-button:hover {
+
+    color: #2563eb;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.video-header {
+    max-width: var(--content-width);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 24px;
+
+    margin-bottom: 24px;
+
+}
+
+.video-thumb-container {
+
+    flex-shrink: 0;
+}
+
+.video-thumb {
+
+    width: 180px !important;
+
+    height: 100px !important;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+    display: block;
+}
+
+.video-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+}
+
+#videoTitle {
+
+    margin: 0;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    line-height: 1.2;
+
+}
+#videoMeta {
+
+    margin-top: 8px;
+
+    font-size: 13px;
+
+    color: #6b7280;
+
+}
+#videoDescription {
+
+    margin-top: 8px;
+
+    font-size: 14px;
+
+    color: #6b7280;
+
+}
+
+.video-info h1 {
+
+    margin: 0 0 10px;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    color: #111827;
+}
+
+.video-meta {
+
+    font-size: 13px;
+
+    color: #6b7280;
+
+    margin-bottom: 8px;
+}
+
+.video-description {
+
+    font-size: 14px;
+
+    color: #4b5563;
+
+    line-height: 1.5;
+
+    margin: 0;
+}
+
+/* =========================================
+   PLAY BUTTON
+========================================= */
+
+.play-button {
+
+    background: #2563eb;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 12px 22px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    margin-top: 15px;
+}
+
+.play-button:hover {
+
+    opacity: .95;
+}
+
+/* =========================================
+   TABS
+========================================= */
+
+.video-tabs {
+    max-width: var(--content-width);
+    
+    margin-top: 0 auto;
+
+    display: flex;
+
+    gap: 40px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+  
+
+    padding-bottom: 0;
+
+}
+
+.video-content {
+
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding-right: 10px;
+
+}
+
+.tab-button {
+
+    background: none;
+
+    border: none;
+
+    cursor: pointer;
+
+    padding: 12px 0;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #6b7280;
+
+}
+
+.tab-button.active {
+
+    color: #2563eb;
+
+    border-bottom: 3px solid #2563eb;
+
+}
+
+.tab-button.active::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: -1px;
+
+    height: 3px;
+
+    background: #2563eb;
+
+    border-radius: 10px;
+}
+
+/* =========================================
+   TAB CONTENT
+========================================= */
+
+.tab-content {
+
+    display: none;
+}
+
+.tab-content.active {
+
+    display: block;
+}
+
+/* =========================================
+   DIALOGUE (LINGQ STYLE)
+========================================= */
+
+.dialogue-container {
+    
+    max-width: var(--content-width);
+
+    width: 100%;
+
+    margin: 0 auto;
+
+    background: white;
+
+    border-radius: 14px;
+
+    border: 1px solid #edf2f7;
+
+}
+
+.dialogue-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    min-height: 60px;
+
+    padding: 10px 16px;
+
+    border-bottom: 1px solid #f1f5f9;
+
+    transition: .15s;
+}
+
+.dialogue-item:last-child {
+
+    border-bottom: none;
+}
+
+.dialogue-item:hover {
+
+    background: #f8fafc;
+}
+
+.dialogue-left {
+
+    width: 36px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+.play-line-btn {
+
+    width: 28px;
+
+    height: 28px;
+
+    border-radius: 50%;
+
+    border: none;
+
+    background: #2563eb;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 11px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.play-line-btn:hover {
+
+    opacity: .9;
+}
+
+.dialogue-center {
+
+    flex: 1;
+}
+
+.dialogue-text {
+
+    font-size: 18px;
+
+    line-height: 1.45;
+
+    color: #111827;
+
+    font-weight: 500;
+}
+
+.dialogue-right {
+
+    width: 60px;
+
+    text-align: right;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    flex-shrink: 0;
+}
+
+/* =========================================
+   VOCABULARY
+========================================= */
+.content-wrapper {
+
+    width: 100%;
+
+    max-width: 900px;
+
+    margin: 0 auto;
+
+}
+
+.vocabulary-container {
+    max-width: var(--content-width);
+
+    width: 100%;
+
+    margin: 0 auto;
+
+    background: white;
+
+    border-radius: 14px;
+
+    border: 1px solid #edf2f7;
+}
+
+.vocab-header {
+
+    display: grid;
+
+    grid-template-columns:
+        160px
+        140px
+        220px
+        1fr;
+
+    gap: 15px;
+
+    background: #f8fafc;
+
+    padding: 14px 18px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: #374151;
+}
+
+.vocab-row {
+
+    display: grid;
+
+    grid-template-columns:
+        160px
+        140px
+        220px
+        1fr;
+
+    gap: 15px;
+
+    padding: 14px 18px;
+
+    border-bottom: 1px solid #f1f5f9;
+
+    align-items: start;
+}
+
+.vocab-row:last-child {
+
+    border-bottom: none;
+}
+
+.vocab-row:hover {
+
+    background: #f8fafc;
+}
+
+.vocab-word {
+
+    font-weight: 700;
+
+    color: #111827;
+}
+
+.vocab-ipa {
+
+    color: #2563eb;
+
+    font-family: Consolas, monospace;
+}
+
+.vocab-translation {
+
+    color: #374151;
+}
+
+.vocab-definition {
+
+    color: #6b7280;
+
+    line-height: 1.5;
+}
+
+/* =========================================
+   EMPTY STATES
+========================================= */
+
+.empty-state {
+
+    text-align: center;
+
+    padding: 60px 20px;
+}
+
+.empty-state h3 {
+
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+
+    color: #6b7280;
+}
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+::-webkit-scrollbar {
+
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+
+    background: #d1d5db;
+
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+
+    background: transparent;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .video-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .video-thumb {
+
+        width: 100%;
+
+        max-width: 420px;
+
+        height: auto;
+    }
+
+    .dialogue-text {
+
+        font-size: 16px;
+    }
+
+    .vocab-header,
+    .vocab-row {
+
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+    }
+
+}
+
+.video-cover {
+
+    width: 160px;
+
+    min-width: 160px;
+
+    position: relative;
+
+}
+
+.video-cover-image {
+
+    width: 160px;
+
+    height: 90px;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+    display: block;
+
+}
+
+.video-cover-play {
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 72px;
+    height: 72px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(0,0,0,.55);
+
+    color: white;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+    transition: all .2s ease;
+
+    backdrop-filter: blur(4px);
+
+}
+
+.video-cover-play:hover {
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.1);
+
+    background: rgba(0,0,0,.75);
+
+}

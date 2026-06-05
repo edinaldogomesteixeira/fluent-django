@@ -1,0 +1,79 @@
+<div id="importVideoModal" class="import-modal">
+
+    <div class="import-modal-content">
+
+        <button
+            id="closeImportModal"
+            class="close-modal"
+        >
+            ✕
+        </button>
+
+        <h2>Import Video</h2>
+
+        <form id="importVideoForm">
+
+            {% csrf_token %}
+
+            <input
+                type="url"
+                id="youtubeUrl"
+                name="youtube_url"
+                placeholder="https://www.youtube.com/watch?v=..."
+            >
+
+            <div class="import-divider">
+                OU
+            </div>
+
+            <input
+                type="file"
+                id="videoFile"
+                name="video_file"
+                accept="video/*"
+            >
+
+            <input
+                type="text"
+                name="title"
+                placeholder="Video title"
+            >
+
+            <select name="level">
+
+                <option value="Beginner">
+                    Beginner
+                </option>
+
+                <option value="Intermediate">
+                    Intermediate
+                </option>
+
+                <option value="Advanced">
+                    Advanced
+                </option>
+
+            </select>
+            <div class="form-group">
+
+                <label>Category</label>
+
+                <select id="video-category">
+
+                    <option value="">
+                        Loading categories...
+                    </option>
+
+                </select>
+
+            </div>
+
+            <button type="submit">
+                Import
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

@@ -1,0 +1,130 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastro | FluentU Clone</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{% static 'css/base.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'css/register.css' %}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+    <div class="auth-wrapper">
+
+        <div class="auth-card">
+
+            <div class="logo">
+
+                <i class="fa-solid fa-fire-flame-simple"></i>
+
+                <span>FluentU Clone</span>
+
+            </div>
+
+            <h1>
+                Crie sua conta
+            </h1>
+
+            <p class="subtitle">
+                É rápido e fácil.
+            </p>
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                {% if form.errors %}
+
+                    <div class="error-box">
+
+                        Verifique os campos preenchidos.
+
+                    </div>
+
+                {% endif %}
+
+                <div class="input-group">
+
+                    {{ form.username }}
+
+                </div>
+
+                <div class="input-group">
+
+                    {{ form.email }}
+
+                </div>
+
+                <div class="input-group">
+
+                    {{ form.password1 }}
+
+                </div>
+
+                <div class="input-group">
+
+                    {{ form.password2 }}
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="primary-btn">
+
+                    Criar conta
+
+                </button>
+
+            </form>
+
+            <div class="footer-link">
+
+                Já possui uma conta?
+
+                <a href="/accounts/login/">
+
+                    Fazer login
+
+                </a>
+
+            </div>
+
+            <div class="footer-link">
+
+                <a href="/">
+
+                    ← Voltar para a página inicial
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,138 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Escolha seu idioma</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/base.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'css/language.css' %}">
+
+</head>
+
+<body>
+
+    <main class="language-page">
+
+        <div class="language-card">
+
+            <div class="logo">
+                🔥 FluentU Clone
+            </div>
+
+            <h1>
+                Qual idioma você quer aprender?
+            </h1>
+
+            <p class="subtitle">
+                Você poderá alterar isso depois.
+            </p>
+
+            <form
+                method="post"
+                action="/onboarding/save-language/">
+
+                {% csrf_token %}
+
+                <input
+                    type="hidden"
+                    id="language"
+                    name="language">
+
+                <div class="languages-grid">
+
+                    {% for language in languages %}
+
+                    <div
+                        class="language-option"
+                        data-code="{{ language.code }}">
+
+                        <div class="flag">
+
+                            {{ language.flag }}
+
+                        </div>
+
+                        <span>
+
+                            {{ language.name }}
+
+                        </span>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                <button
+                    id="continueBtn"
+                    class="continue-btn"
+                    disabled>
+
+                    Continuar
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <script>
+
+        const options =
+            document.querySelectorAll(
+                '.language-option'
+            );
+
+        const button =
+            document.getElementById(
+                'continueBtn'
+            );
+
+        const input =
+            document.getElementById(
+                'language'
+            );
+
+        options.forEach(option => {
+
+            option.addEventListener(
+                'click',
+                () => {
+
+                    options.forEach(
+                        item => item.classList.remove(
+                            'selected'
+                        )
+                    );
+
+                    option.classList.add(
+                        'selected'
+                    );
+
+                    input.value =
+                        option.dataset.code;
+
+                    button.disabled = false;
+                }
+            );
+        });
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+from django.urls import path
+from .views import *
+
+urlpatterns = [
+
+    path('', home, name='home'),
+
+    path('explore/', explore_page),
+    path('explore-content/',explore_content),
+
+    path('video/', video_page),
+    
+    path('reading/', reading_page),
+
+    path('play/', play_page),
+    
+    path('courses/', courses_page),
+    
+    path('topic/', topic_page),
+    
+    path('dashboard/', dashboard_page),
+
+]
+
+

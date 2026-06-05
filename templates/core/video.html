@@ -1,0 +1,150 @@
+<section class="video-page">
+
+    <!-- CABEÇALHO FIXO -->
+
+    <div class="video-fixed-header">
+
+        <button
+            class="back-button"
+            id="backButton"
+        >
+            ← Back to Explore
+        </button>
+
+        <div class="video-header">
+
+            <div class="video-cover">
+
+                <img
+                    id="videoImage"
+                    class="video-cover-image"
+                    src=""
+                    alt=""
+                >
+
+                <button
+                    id="playButton"
+                    class="video-cover-play"
+                >
+                    ▶
+                </button>
+
+            </div>
+
+            <div class="video-info">
+
+                <h1 id="videoTitle"></h1>
+
+                <div id="videoMeta"></div>
+
+                <div id="videoDescription"></div>
+
+            </div>
+
+        </div>
+
+        <div class="video-tabs">
+
+            <button
+                class="tab-button active"
+                data-tab="dialogue">
+                Dialogue
+            </button>
+
+            <button
+                class="tab-button"
+                data-tab="vocabulary">
+                Vocabulary
+            </button>
+
+            <button
+                class="tab-button"
+                data-tab="listen">
+                Listen
+            </button>
+
+            <button
+                class="tab-button"
+                data-tab="review">
+                Review
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ÁREA COM SCROLL -->
+
+    <div class="video-scroll-content">
+
+        <!-- DIALOGUE -->
+
+        <div
+            id="dialogueTab"
+            class="tab-content active">
+
+            <div
+                id="videoDialogue"
+                class="dialogue-container">
+
+            </div>
+
+        </div>
+
+        <!-- VOCABULARY -->
+
+        <div
+            id="vocabularyTab"
+            class="tab-content">
+
+            <div
+                id="videoVocabulary"
+                class="vocabulary-container">
+
+            </div>
+
+        </div>
+
+        <!-- LISTEN -->
+
+        <div
+            id="listenTab"
+            class="tab-content">
+
+            <div class="empty-state">
+
+                <h3>
+                    Listen Mode
+                </h3>
+
+                <p>
+                    Coming soon...
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- REVIEW -->
+
+        <div
+            id="reviewTab"
+            class="tab-content">
+
+            <div class="empty-state">
+
+                <h3>
+                    Review Mode
+                </h3>
+
+                <p>
+                    Coming soon...
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

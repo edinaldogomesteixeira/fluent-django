@@ -1,0 +1,111 @@
+{% load static %}
+<header class="topbar">
+
+    <div class="topbar-left">
+
+        <div class="logo">
+            FluentU
+        </div>
+
+        <div class="search-area">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input type="text" placeholder="Search for words/phrases or content" class="search-input" id="searchInput">
+
+        </div>
+
+    </div>
+
+    <div class="topbar-right">
+
+        <button class="import-video-button">
+
+            <i class="fa-solid fa-play"></i>
+
+            Import Video
+
+        </button>
+
+        <div class="language-selector" id="languageSelector">
+
+            <img id="currentLanguageFlag" src="{% static 'images/flags/'|add:current_language.flag|add:'.png' %}"
+                class="language-flag">
+
+            <i class="fa-solid fa-chevron-down"></i>
+
+            <div class="language-dropdown" id="languageDropdown"></div>
+
+        </div>
+
+        <!-- STATS -->
+
+        <div class="topbar-stats">
+
+            <div class="stat-item" title="Known Words">
+
+                <i class="fa-solid fa-book-open"></i>
+
+                <span>{{ known_words }}</span>
+
+            </div>
+
+            <div class="stat-item" title="Learning Words">
+
+                <i class="fa-solid fa-book"></i>
+
+                <span>{{ learning_words }}</span>
+
+            </div>
+
+            <div class="stat-item" title="Study Streak">
+
+                <i class="fa-solid fa-fire"></i>
+
+                <span>{{ streak_days }}</span>
+
+            </div>
+
+        </div>
+
+        {% if user.is_authenticated %}
+
+        <div class="user-selector" id="userSelector">
+
+            <div class="avatar" title="{{ request.user.username }}">
+
+                {{ user.username|slice:":2"|upper }}
+
+            </div>
+
+            <i class="fa-solid fa-chevron-down"></i>
+
+            <div class="user-dropdown" id="userDropdown">
+
+                <a href="#">
+                    Meu Perfil
+                </a>
+
+                <a href="#">
+                    Configurações
+                </a>
+
+                <form method="post" action="/accounts/logout/">
+
+                    {% csrf_token %}
+
+                    <button type="submit" class="logout-button">
+                        Sair
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</header>

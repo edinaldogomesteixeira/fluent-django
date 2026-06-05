@@ -1,0 +1,15 @@
+[
+    {
+        "title": "Friends",
+
+        "provider": "bunny",
+
+        "libraryId": "665190",
+
+        "videoId": "e9eed5ae-7b98-414f-8b99-3e3d0aefe663",
+
+        "image": "./assets/images/thumbnails/video1.jpg",
+
+        "subtitles": "./assets/data/subtitles/vocabulary.json"
+    }
+]

@@ -1,0 +1,249 @@
+body {
+    background: #f8fafc;
+}
+
+.login-wrapper {
+    padding: 24px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.login-card {
+
+    width: 420px;
+
+    background: white;
+
+    border: 1px solid #E5E7EB;
+
+    border-radius: 12px;
+
+    padding: 40px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, .05);
+}
+
+.logo {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #2563EB;
+
+    font-weight: 700;
+
+    margin-bottom: 30px;
+}
+
+.logo i {
+    font-size: 18px;
+}
+
+h1 {
+
+    text-align: center;
+
+    font-size: 34px;
+
+    margin-bottom: 10px;
+
+    font-weight: 700;
+}
+
+.subtitle {
+
+    text-align: center;
+
+    color: #6B7280;
+
+    margin-bottom: 30px;
+}
+
+.google-btn {
+
+    width: 100%;
+
+    height: 50px;
+
+    border: 1px solid #E5E7EB;
+
+    background: white;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    cursor: pointer;
+
+    font-weight: 500;
+
+    transition: .3s;
+}
+
+.google-btn:hover {
+    background: #F9FAFB;
+}
+
+.google-btn img {
+    width: 20px;
+}
+
+.divider {
+
+    display: flex;
+
+    align-items: center;
+
+    margin: 25px 0;
+}
+
+.divider::before,
+.divider::after {
+
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background: #E5E7EB;
+}
+
+.divider span {
+
+    padding: 0 15px;
+
+    color: #9CA3AF;
+}
+
+.input-group {
+
+    position: relative;
+
+    margin-bottom: 16px;
+}
+
+.input-group input {
+
+    width: 100%;
+
+    height: 50px;
+
+    padding: 0 16px;
+
+    border: 1px solid #D1D5DB;
+
+    border-radius: 10px;
+
+    outline: none;
+}
+
+.input-group input:focus {
+
+    border-color: #2563EB;
+}
+
+.toggle-password {
+
+    position: absolute;
+
+    right: 15px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: none;
+
+    cursor: pointer;
+
+    color: #6B7280;
+}
+
+.forgot-link {
+
+    display: inline-block;
+
+    margin-bottom: 25px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    color: #2563EB;
+}
+
+.login-btn {
+
+    width: 100%;
+
+    height: 52px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #2563EB;
+
+    color: white;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.login-btn:hover {
+
+    background: #1D4ED8;
+}
+
+.signup {
+
+    margin-top: 25px;
+
+    text-align: center;
+
+    color: #6B7280;
+}
+
+.signup a {
+
+    text-decoration: none;
+
+    color: #2563EB;
+
+    font-weight: 500;
+}
+
+@media(max-width:480px) {
+
+    .login-card {
+
+        width: 100%;
+
+        padding: 30px 20px;
+    }
+
+    h1 {
+
+        font-size: 28px;
+    }
+
+}

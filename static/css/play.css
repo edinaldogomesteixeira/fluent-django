@@ -1,0 +1,200 @@
+.play-page {
+
+    padding: 30px;
+}
+
+/* CONTENT CONTAINER */
+
+.play-content-container {
+
+    width: 100%;
+
+    max-width: 1200px;
+
+    margin: 0 auto;
+}
+/* VIDEO CONTAINER */
+
+.play-video-container {
+
+    width: 100%;
+
+    margin-top: 20px;
+}
+
+/* VIDEO */
+
+#playVideo {
+
+    width: 100%;
+
+    max-height: 78vh;
+
+    border-radius: 20px;
+
+    background: black;
+
+    object-fit: contain;
+}
+
+.play-subtitles {
+
+    margin-top: 30px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+.play-subtitle-line {
+
+    font-size: 28px;
+
+    line-height: 1.7;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    padding: 10px 0;
+}
+
+.play-subtitle-line:hover {
+
+    color: #2563eb;
+}
+.play-subtitles {
+
+    margin-top: 40px;
+
+    min-height: 120px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+.active-subtitle {
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    line-height: 1.8;
+
+    max-width: 1000px;
+
+    color: #111;
+
+    transition: 0.2s;
+
+    padding: 0 24px;
+}
+
+/* DEFAULT */
+
+/* WORD */
+
+.subtitle-word {
+
+    cursor: pointer;
+
+    display: inline-block;
+
+    border-radius: 6px;
+
+    padding: 2px 4px;
+
+    transition: 0.18s ease;
+}
+
+
+/* HOVER */
+
+.subtitle-word:hover {
+
+    opacity: 0.85;
+}
+
+
+/* WORD NOT IN DATABASE */
+
+/* NEW WORD */
+
+.subtitle-word.new-word {
+
+    color: #2563eb;
+
+    background: #dbeafe;
+}
+
+
+/* LEVEL 1 */
+
+.subtitle-word.level-1 {
+
+    background: #fadf73;
+
+    color: #111827;
+}
+
+
+/* LEVEL 2 */
+
+.subtitle-word.level-2 {
+
+    background: #f6e7a6;
+
+    color: #111827;
+}
+
+
+/* LEVEL 3 */
+
+.subtitle-word.level-3 {
+
+    background: #fbf5dc;
+
+    color: #111827;
+}
+
+
+/* LEVEL 4 */
+
+/* LEVEL 4 */
+
+.subtitle-word.level-4 {
+
+    background: transparent;
+
+    color: inherit;
+
+    text-decoration-line: underline;
+
+    text-decoration-style: dotted;
+
+    text-decoration-color: #9ca3af;
+
+    text-decoration-thickness: 1.5px;
+
+    text-underline-offset: 6px;
+
+    border-radius: 0;
+}
+
+/* LEVEL 5 */
+
+.subtitle-word.level-5 {
+
+    background: transparent;
+
+    color: inherit;
+
+    border: none;
+}

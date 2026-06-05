@@ -1,0 +1,137 @@
+{
+    "recentVideos": [
+
+       {
+            "id": "1",
+            "title": "Friends",
+            "category": "kids",
+            "provider": "hls",
+            "level": "Intermediate",
+            "words": 120,
+            "duration": "3:20",
+            "image":"https://vz-daa8a3a5-441.b-cdn.net/e9eed5ae-7b98-414f-8b99-3e3d0aefe663/thumbnail_0592e38c.jpg",
+            "preview":"https://vz-daa8a3a5-441.b-cdn.net/e9eed5ae-7b98-414f-8b99-3e3d0aefe663/preview.webp?v=1779321416",
+            "hls":  "https://vz-daa8a3a5-441.b-cdn.net/e9eed5ae-7b98-414f-8b99-3e3d0aefe663/playlist.m3u8",
+            "subtitles": "/static/data/subtitles/friends.json"
+        },
+
+        {
+            "id": "2",
+            "title": "Youtube teste",
+            "category": "kids",
+            "provider": "youtube",
+            "youtubeId": "VxmrDZj9gJo",
+            "level": "Intermediate 2",
+            "words": 8,
+            "duration": "1:24",
+            "image": "https://picsum.photos/300/170?2",
+            "video": "https://filesamples.com/samples/video/mp4/sample_960x400_ocean_with_audio.mp4",
+            "subtitles": "/static/data/subtitles/friends.json"
+        },
+        {
+            "id": "3",
+            "title": "Friends dfdf",
+            "category": "kids",
+            "provider": "hls",
+            "level": "Intermediate",
+            "words": 120,
+            "duration": "3:20",
+            "image":"https://vz-daa8a3a5-441.b-cdn.net/b232c57d-df0c-445e-8279-962a0e83f984/thumbnail_acc8b3b1.jpg",
+            "preview":"https://vz-daa8a3a5-441.b-cdn.net/b232c57d-df0c-445e-8279-962a0e83f984/preview.webp?v=1779721142",
+            "hls":  "https://vz-daa8a3a5-441.b-cdn.net/b232c57d-df0c-445e-8279-962a0e83f984/playlist.m3u8",
+            "subtitles": "/static/data/subtitles/friends.json"
+        },
+         {
+            "id": "5",
+            "title": "YouTube2",
+            "category": "kids",
+            "provider": "youtube",
+            "youtubeId": "QQK7rgM3Mhk",
+            "image": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+            "preview": "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+            "level": "Intermediate",
+            "words": 100,
+            "subtitles": "/static/data/subtitles/friends.json"
+        }
+
+
+    ],
+
+    "trendingVideos": [
+
+        {
+            "id": "6",
+            "title": "Harry Potter Scene",
+            "provider": "local",
+            "level": "Beginner 2",
+            "words": 18,
+            "duration": "3:20",
+            "image": "/static/images/thumbnails/video1.jpg",
+            "video": "/static/videos/friends.mp4",
+            "subtitles": "/static/data/subtitles/friends.json"
+        },
+
+        {
+            "id": "7",
+            "title": "Friends Funny Scene",
+            "provider": "local",
+            "level": "Intermediate 1",
+            "words": 12,
+            "duration": "2:45",
+            "image": "https://picsum.photos/300/170?5",
+            "video": "https://www.w3schools.com/html/mov_bbb.mp4"
+        },
+
+        {
+            "id": "8",
+            "title": "Marvel Interview",
+            "provider": "local",
+            "level": "Advanced 1",
+            "words": 22,
+            "duration": "5:01",
+            "image": "https://picsum.photos/300/170?6",
+            "video": "https://www.w3schools.com/html/mov_bbb.mp4",
+            "subtitles": "/static/data/subtitles/friends.json"
+        }
+
+    ],
+
+     "trend3": [
+
+        {
+            "id": "9",
+            "title": "Harry Potter Scene",
+            "provider": "local",
+            "level": "Beginner 2",
+            "words": 18,
+            "duration": "3:20",
+            "image": "/static/images/thumbnails/video1.jpg",
+            "video": "/static/videos/friends.mp4",
+            "subtitles": "/static/subtitles/friends.json"
+        },
+
+        {
+            "id": "10",
+            "title": "Friends Funny Scene",
+            "provider": "local",
+            "level": "Intermediate 1",
+            "words": 12,
+            "duration": "2:45",
+            "image": "https://picsum.photos/300/170?5",
+            "video": "https://www.w3schools.com/html/mov_bbb.mp4"
+        },
+
+        {
+            "id": "11",
+            "title": "Marvel Interview",
+            "provider": "local",
+            "level": "Advanced 1",
+            "words": 22,
+            "duration": "5:01",
+            "image": "https://picsum.photos/300/170?6",
+            "video": "https://www.w3schools.com/html/mov_bbb.mp4",
+            "subtitles": "/static/data/subtitles/friends.json"
+        }
+
+    ]
+}
