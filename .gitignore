@@ -7,7 +7,7 @@ __pycache__/
 venv/
 
 # SQLite
-db.sqlite3
+#db.sqlite3
 
 # Media
 media/
@@ -28,3 +28,6 @@ staticfiles/
 build/
 dist/
 *.egg-info/
+
+# outras
+backup/
