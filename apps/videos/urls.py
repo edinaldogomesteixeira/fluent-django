@@ -3,8 +3,12 @@ from django.urls import path
 from .views import video_list,category_list
 from .views import stream_video
 from .views import upload_video
-from .views import import_youtube
-
+from .views import (
+    import_youtube,
+    worker_next_video,
+    worker_update_status,
+    worker_complete_video
+)
 
 urlpatterns = [
 
@@ -38,6 +42,33 @@ urlpatterns = [
         import_youtube,
 
         name='import_youtube'
+
+    ),
+    path(
+
+        'api/worker/videos/next/',
+
+        worker_next_video,
+
+        name='worker_next_video'
+
+    ),
+    path(
+
+        'api/worker/videos/<int:video_id>/status/',
+
+        worker_update_status,
+
+        name='worker_update_status'
+
+    ),
+    path(
+
+        'api/worker/videos/<int:video_id>/complete/',
+
+        worker_complete_video,
+
+        name='worker_complete_video'
 
     ),
 

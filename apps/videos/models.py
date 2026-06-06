@@ -46,7 +46,9 @@ class Video(models.Model):
 
         ('pending', 'Pending'),
 
-        ('processing', 'Processing'),
+        ('downloading', 'Downloading'),
+
+        ('uploading', 'Uploading'),
 
         ('ready', 'Ready'),
 

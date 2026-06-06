@@ -44,7 +44,7 @@ mkdir "%TEMP_DIR%"
 :: =========================================
 
 robocopy "%SOURCE_DIR%" "%TEMP_DIR%" /E ^
-/XD venv .venv env .git __pycache__ node_modules media videos imagens backup .idea .vscode dist build ^
+/XD venv .venv env .git __pycache__ node_modules media backup .idea .vscode dist build ^
 /XF *.log *.pyc *.zip *.bat .env db.sqlite3 *.sqlite3 ^
 /R:2 /W:2
 

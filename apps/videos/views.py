@@ -211,42 +211,44 @@ from django.views.decorators.csrf import csrf_exempt
 @login_required
 @require_POST
 def import_youtube(request):
- 
+
     youtube_url = request.POST.get(
-        'youtube_url'
+        "youtube_url"
     )
 
     category_id = request.POST.get(
-            "category_id"
-        )
-
+        "category_id"
+    )
 
     if not youtube_url:
 
-        return JsonResponse({
-
-            'success': False,
-
-            'message':
-                'Youtube URL required'
-
-        }, status=400)
+        return JsonResponse(
+            {
+                "success": False,
+                "message": "Youtube URL required"
+            },
+            status=400
+        )
 
     try:
 
-        video = import_youtube_to_bunny(
+        video = Video.objects.create(
 
-            youtube_url,
+            title="Processing...",
 
-            request.user.profile.current_language
+            provider="youtube",
 
+            youtube_url=youtube_url,
+
+            language=request.user.profile.current_language,
+
+            status="pending"
         )
+
         if category_id:
 
             category = Category.objects.filter(
-
                 id=category_id
-
             ).first()
 
             if category:
@@ -257,11 +259,13 @@ def import_youtube(request):
 
         return JsonResponse({
 
-            'success': True,
+            "success": True,
 
-            'video_id': video.id,
+            "video_id": video.id,
 
-            'title': video.title
+            "title": video.title,
+
+            "status": video.status
 
         })
 
@@ -269,9 +273,9 @@ def import_youtube(request):
 
         return JsonResponse({
 
-            'success': False,
+            "success": False,
 
-            'message': str(e)
+            "message": str(e)
 
         }, status=500)
     
@@ -297,3 +301,175 @@ def category_list(request):
         data,
         safe=False
     )
+
+from django.views.decorators.http import require_GET
+
+
+@csrf_exempt
+@require_GET
+def worker_next_video(request):
+
+    video = (
+
+        Video.objects.filter(
+            status="pending",
+            provider="hls"
+        )
+
+        .order_by("created_at")
+
+        .first()
+
+    )
+
+    if not video:
+
+        return JsonResponse(
+            {}
+        )
+
+    return JsonResponse({
+
+        "id": video.id,
+
+        "youtube_url":
+            video.youtube_url,
+
+        "language_id":
+
+            video.language_id
+
+    })
+
+import json
+
+
+@csrf_exempt
+@require_POST
+def worker_update_status(
+    request,
+    video_id
+):
+
+    video = get_object_or_404(
+        Video,
+        id=video_id
+    )
+
+    try:
+
+        data = json.loads(
+            request.body
+        )
+
+        status = data.get(
+            "status"
+        )
+
+        if not status:
+
+            return JsonResponse(
+                {
+                    "success": False,
+                    "message": "Status required"
+                },
+                status=400
+            )
+
+        video.status = status
+
+        video.save()
+
+        return JsonResponse({
+
+            "success": True,
+
+            "video_id": video.id,
+
+            "status": video.status
+
+        })
+
+    except Exception as e:
+
+        return JsonResponse({
+
+            "success": False,
+
+            "message": str(e)
+
+        }, status=500)
+    
+@csrf_exempt
+@require_POST
+def worker_complete_video(
+    request,
+    video_id
+):
+
+    video = get_object_or_404(
+        Video,
+        id=video_id
+    )
+
+    try:
+
+        data = json.loads(
+            request.body
+        )
+
+        video.title = data.get(
+            "title",
+            video.title
+        )
+
+        video.duration = str(
+            data.get(
+                "duration",
+                video.duration
+            )
+        )
+
+        video.image = data.get(
+            "thumbnail_url",
+            video.image
+        )
+
+        video.preview = data.get(
+            "preview_url",
+            video.preview
+        )
+
+        video.hls = data.get(
+            "hls_url",
+            video.hls
+        )
+
+        video.bunny_video_id = data.get(
+            "bunny_video_id",
+            video.bunny_video_id
+        )
+
+        video.status = "ready"
+
+        video.save()
+
+        return JsonResponse({
+
+            "success": True,
+
+            "video_id": video.id,
+
+            "status": video.status
+
+        })
+
+    except Exception as e:
+
+        return JsonResponse({
+
+            "success": False,
+
+            "message": str(e)
+
+        }, status=500)
