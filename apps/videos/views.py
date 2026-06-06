@@ -236,7 +236,7 @@ def import_youtube(request):
 
             title="Processing...",
 
-            provider="youtube",
+            provider="HLS",
 
             youtube_url=youtube_url,
 
