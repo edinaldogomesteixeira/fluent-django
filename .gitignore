@@ -10,7 +10,7 @@ venv/
 db.sqlite3
 
 # Media
-media/
+/media/
 
 # Static
 staticfiles/
