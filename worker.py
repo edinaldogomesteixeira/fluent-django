@@ -10,7 +10,8 @@ from pathlib import Path
 # DJANGO
 # ==========================
 
-BASE_URL = "http://192.168.15.41:8000"
+BASE_URL = "http://2.24.104.26"
+#BASE_URL = "http://192.168.15.41:8000"
 
 # ==========================
 # BUNNY STREAM
