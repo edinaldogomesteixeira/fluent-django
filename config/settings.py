@@ -154,17 +154,11 @@ DEBUG = ENVIRONMENT == "local"
 
 STATIC_URL = "/static/"
 
-if DEBUG:
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
-    STATICFILES_DIRS = [
-        BASE_DIR / "static"
-    ]
-
-else:
-
-    STATIC_ROOT = (
-        BASE_DIR / "staticfiles"
-    )
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
 
 #DEBUG = os.getenv("DEBUG", "False") == "True"
 #STATIC_URL = '/static/'
