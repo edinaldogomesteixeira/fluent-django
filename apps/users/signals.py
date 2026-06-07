@@ -10,9 +10,4 @@ def create_user_profile(sender, instance, created, **kwargs):
 
     if created:
 
-        UserProfile.objects.create(
-
-            user=instance,
-
-            current_language=None
-        )
+        UserProfile.objects.create(user=instance, language_learning=None)

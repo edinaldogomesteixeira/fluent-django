@@ -1,10 +1,7 @@
 import os
 from django.conf import settings
 from django.http import JsonResponse
-from django.shortcuts import (
-    render,
-    get_object_or_404
-)
+from django.shortcuts import render, get_object_or_404
 
 from .models import Video, Category
 from apps.users.models import UserProfile
@@ -12,273 +9,162 @@ from apps.users.models import UserProfile
 
 def video_list(request):
 
-    if (
+    if request.user.is_authenticated and request.user.profile.language_learning:
 
-        request.user.is_authenticated
-
-        and
-
-        request.user.profile.current_language
-
-    ):
-
-        videos = Video.objects.filter(
-
-            language=
-            request.user.profile.current_language
-
-        )
+        videos = Video.objects.filter(language=request.user.profile.language_learning)
 
     else:
 
         videos = Video.objects.all()
 
-
     data = []
 
     for video in videos:
 
-        data.append({
+        data.append(
+            {
+                "id": video.id,
+                "title": video.title,
+                "description": video.description,
+                "image": video.image,
+                "preview": video.preview,
+                "level": video.level,
+                "words": video.words,
+                "provider": video.provider,
+                "video": video.video,
+                "youtubeId": video.youtube_id,
+                "hls": video.hls,
+                "subtitles": video.subtitles,
+                "categories": [
+                    {
+                        "name": category.name,
+                        "slug": category.slug,
+                    }
+                    for category in video.categories.all()
+                ],
+            }
+        )
 
-            'id': video.id,
-
-            'title': video.title,
-
-            'description': video.description,
-
-            'image': video.image,
-            
-            'preview': video.preview,
-
-            'level': video.level,
-
-            'words': video.words,
-
-            'provider': video.provider,
-
-            'video': video.video,
-
-            'youtubeId': video.youtube_id,
-
-            'hls': video.hls,
-
-            'subtitles': video.subtitles,
-
-            'categories': [
-
-                {
-                    'name': category.name,
-                    'slug': category.slug,
-                }
-
-                for category in video.categories.all()
-
-            ],
-        })
-
-    return JsonResponse(
-        data,
-        safe=False
-    )
+    return JsonResponse(data, safe=False)
 
 
-from ranged_response import (
-    RangedFileResponse
-)
+from ranged_response import RangedFileResponse
 
-def stream_video(
-    request,
-    video_id
-):
 
-    video = get_object_or_404(
-        Video,
-        id=video_id
-    )
+def stream_video(request, video_id):
 
-    file_path = os.path.join(
+    video = get_object_or_404(Video, id=video_id)
 
-        settings.BASE_DIR,
+    file_path = os.path.join(settings.BASE_DIR, video.video.lstrip("/"))
 
-        video.video.lstrip('/')
-    )
+    file_handle = open(file_path, "rb")
 
-    file_handle = open(
-        file_path,
-        'rb'
-    )
+    response = RangedFileResponse(request, file_handle, content_type="video/mp4")
 
-    response = RangedFileResponse(
-
-        request,
-
-        file_handle,
-
-        content_type='video/mp4'
-    )
-
-    response['Accept-Ranges'] = (
-        'bytes'
-    )
+    response["Accept-Ranges"] = "bytes"
 
     return response
 
+
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
+
 
 @login_required
 @require_POST
 def upload_video(request):
 
-    title = request.POST.get('title')
+    title = request.POST.get("title")
 
-    level = request.POST.get('level')
+    level = request.POST.get("level")
 
-    video_file = request.FILES.get(
-        'video_file'
-    )
+    video_file = request.FILES.get("video_file")
 
     if not video_file:
 
-        return JsonResponse(
-            {
-                'success': False,
-                'message': 'Video required'
-            },
-            status=400
-        )
+        return JsonResponse({"success": False, "message": "Video required"}, status=400)
 
-    video_path = (
-        f'media/videos/{video_file.name}'
-    )
+    video_path = f"media/videos/{video_file.name}"
 
     import os
 
-    os.makedirs(
-        'media/videos',
-        exist_ok=True
-    )
+    os.makedirs("media/videos", exist_ok=True)
 
-    with open(
-        video_path,
-        'wb+'
-    ) as destination:
+    with open(video_path, "wb+") as destination:
 
         for chunk in video_file.chunks():
 
             destination.write(chunk)
-    
+
     profile = request.user.profile
 
     video = Video.objects.create(
-
         title=title or video_file.name,
-
-        provider='local',
-
-        video='/' + video_path,
-
+        provider="local",
+        video="/" + video_path,
         level=level,
-
-        status='ready',
-
-        language=profile.current_language
-
+        status="ready",
+        language=profile.language_learning,
     )
 
-    default_category = Category.objects.filter(
-        name='Most Recent'
-    ).first()
+    default_category = Category.objects.filter(name="Most Recent").first()
 
     if default_category:
 
-        video.categories.add(
-            default_category
-        )
+        video.categories.add(default_category)
 
-    return JsonResponse({
+    return JsonResponse({"success": True, "video_id": video.id})
 
-        'success': True,
 
-        'video_id': video.id
-
-    })
-
-from apps.videos.services.video_import_service import (import_youtube_to_bunny)
+from apps.videos.services.video_import_service import import_youtube_to_bunny
 from django.views.decorators.csrf import csrf_exempt
+
 
 @csrf_exempt
 @login_required
 @require_POST
 def import_youtube(request):
 
-    youtube_url = request.POST.get(
-        "youtube_url"
-    )
+    youtube_url = request.POST.get("youtube_url")
 
-    category_id = request.POST.get(
-        "category_id"
-    )
+    category_id = request.POST.get("category_id")
 
     if not youtube_url:
 
         return JsonResponse(
-            {
-                "success": False,
-                "message": "Youtube URL required"
-            },
-            status=400
+            {"success": False, "message": "Youtube URL required"}, status=400
         )
 
     try:
 
         video = Video.objects.create(
-
             title="Processing...",
-
             provider="hls",
-
             youtube_url=youtube_url,
-
-            language=request.user.profile.current_language,
-
-            status="pending"
+            language=request.user.profile.language_learning,
+            status="pending",
         )
 
         if category_id:
 
-            category = Category.objects.filter(
-                id=category_id
-            ).first()
+            category = Category.objects.filter(id=category_id).first()
 
             if category:
 
-                video.categories.add(
-                    category
-                )
+                video.categories.add(category)
 
-        return JsonResponse({
-
-            "success": True,
-
-            "video_id": video.id,
-
-            "title": video.title,
-
-            "status": video.status
-
-        })
+        return JsonResponse(
+            {
+                "success": True,
+                "video_id": video.id,
+                "title": video.title,
+                "status": video.status,
+            }
+        )
 
     except Exception as e:
 
-        return JsonResponse({
-
-            "success": False,
-
-            "message": str(e)
-
-        }, status=500)
-    
+        return JsonResponse({"success": False, "message": str(e)}, status=500)
 
 
 def category_list(request):
@@ -287,20 +173,10 @@ def category_list(request):
 
     for category in Category.objects.all():
 
-        data.append({
+        data.append({"id": category.id, "name": category.name, "slug": category.slug})
 
-            "id": category.id,
+    return JsonResponse(data, safe=False)
 
-            "name": category.name,
-
-            "slug": category.slug
-
-        })
-
-    return JsonResponse(
-        data,
-        safe=False
-    )
 
 from django.views.decorators.http import require_GET
 
@@ -310,166 +186,167 @@ from django.views.decorators.http import require_GET
 def worker_next_video(request):
 
     video = (
-
-        Video.objects.filter(
-            status="pending",
-            provider="hls"
-        )
-
+        Video.objects.filter(status="pending", provider="hls")
         .order_by("created_at")
-
         .first()
-
     )
 
     if not video:
 
-        return JsonResponse(
-            {}
-        )
+        return JsonResponse({})
 
-    return JsonResponse({
+    return JsonResponse(
+        {
+            "id": video.id,
+            "youtube_url": video.youtube_url,
+            "language_id": video.language_id,
+        }
+    )
 
-        "id": video.id,
-
-        "youtube_url":
-            video.youtube_url,
-
-        "language_id":
-
-            video.language_id
-
-    })
 
 import json
 
 
 @csrf_exempt
 @require_POST
-def worker_update_status(
-    request,
-    video_id
-):
+def worker_update_status(request, video_id):
 
-    video = get_object_or_404(
-        Video,
-        id=video_id
-    )
+    video = get_object_or_404(Video, id=video_id)
 
     try:
 
-        data = json.loads(
-            request.body
-        )
+        data = json.loads(request.body)
 
-        status = data.get(
-            "status"
-        )
+        status = data.get("status")
 
         if not status:
 
             return JsonResponse(
-                {
-                    "success": False,
-                    "message": "Status required"
-                },
-                status=400
+                {"success": False, "message": "Status required"}, status=400
             )
 
         video.status = status
 
         video.save()
 
-        return JsonResponse({
-
-            "success": True,
-
-            "video_id": video.id,
-
-            "status": video.status
-
-        })
+        return JsonResponse(
+            {"success": True, "video_id": video.id, "status": video.status}
+        )
 
     except Exception as e:
 
-        return JsonResponse({
+        return JsonResponse({"success": False, "message": str(e)}, status=500)
 
-            "success": False,
 
-            "message": str(e)
-
-        }, status=500)
-    
 @csrf_exempt
 @require_POST
-def worker_complete_video(
-    request,
-    video_id
-):
+def worker_complete_video(request, video_id):
 
-    video = get_object_or_404(
-        Video,
-        id=video_id
-    )
+    video = get_object_or_404(Video, id=video_id)
 
     try:
 
-        data = json.loads(
-            request.body
-        )
+        data = json.loads(request.body)
 
-        video.title = data.get(
-            "title",
-            video.title
-        )
+        video.title = data.get("title", video.title)
 
-        video.duration = str(
-            data.get(
-                "duration",
-                video.duration
-            )
-        )
+        video.duration = str(data.get("duration", video.duration))
 
-        video.image = data.get(
-            "thumbnail_url",
-            video.image
-        )
+        video.image = data.get("thumbnail_url", video.image)
 
-        video.preview = data.get(
-            "preview_url",
-            video.preview
-        )
+        video.preview = data.get("preview_url", video.preview)
 
-        video.hls = data.get(
-            "hls_url",
-            video.hls
-        )
+        video.hls = data.get("hls_url", video.hls)
 
-        video.bunny_video_id = data.get(
-            "bunny_video_id",
-            video.bunny_video_id
-        )
+        video.bunny_video_id = data.get("bunny_video_id", video.bunny_video_id)
 
-        video.status = "ready"
+        video.status = "transcription_pending"
 
         video.save()
 
-        return JsonResponse({
-
-            "success": True,
-
-            "video_id": video.id,
-
-            "status": video.status
-
-        })
+        return JsonResponse(
+            {"success": True, "video_id": video.id, "status": video.status}
+        )
 
     except Exception as e:
 
-        return JsonResponse({
+        return JsonResponse({"success": False, "message": str(e)}, status=500)
 
-            "success": False,
 
-            "message": str(e)
+@csrf_exempt
+@require_GET
+def worker_next_transcription(request):
 
-        }, status=500)
+    video = (
+        Video.objects.filter(status="transcription_pending")
+        .order_by("created_at")
+        .first()
+    )
+
+    if not video:
+
+        return JsonResponse({})
+
+    return JsonResponse(
+        {
+            "id": video.id,
+            "title": video.title,
+            "hls": video.hls,
+            "bunny_video_id": video.bunny_video_id,
+        }
+    )
+
+
+from apps.subtitles.models import SubtitleSegment
+from apps.vocabulary.services.vocabulary_import_service import import_vocabulary
+
+
+@csrf_exempt
+@require_POST
+def worker_save_segments(request, video_id):
+
+    video = get_object_or_404(Video, id=video_id)
+
+    try:
+
+        data = json.loads(request.body)
+
+        language_code = data.get("language_code")
+
+        segments = data.get("segments", [])
+
+        SubtitleSegment.objects.filter(video=video).delete()
+
+        for index, segment in enumerate(segments, start=1):
+
+            SubtitleSegment.objects.create(
+                video=video,
+                sequence_order=index,
+                start_seconds=segment["start"],
+                end_seconds=segment["end"],
+                text=segment["text"].strip(),
+            )
+
+        from apps.users.models import Language
+
+        language = Language.objects.filter(code=language_code).first()
+
+        if language:
+
+            video.language = language
+
+            video.save(update_fields=["language"])
+
+        target_language = Language.objects.get(code="de")
+        #target_language = request.user.profile.language_native
+
+        total_words = import_vocabulary(video)
+
+        return JsonResponse(
+            {"success": True, "segments": len(segments), "words": total_words}
+        )
+
+    except Exception as e:
+        raise
+
+    # return JsonResponse({"success": False, "message": str(e)}, status=500)

@@ -4,26 +4,17 @@ from django.contrib.auth.models import User
 
 class Language(models.Model):
 
-    code = models.CharField(
-        max_length=10,
-        unique=True
-    )
+    name = models.CharField(max_length=50)
 
-    name = models.CharField(
-        max_length=50
-    )
+    code = models.CharField(max_length=10, unique=True)
 
-    flag = models.CharField(
-        max_length=20
-    )
+    translation_code = models.CharField(max_length=10, blank=True, null=True)
 
-    is_active = models.BooleanField(
-        default=True
-    )
+    flag = models.CharField(max_length=20)
 
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
+    is_active = models.BooleanField(default=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
 
@@ -33,54 +24,37 @@ class Language(models.Model):
 class UserProfile(models.Model):
 
     GOAL_CHOICES = [
-
-        ('travel', 'Travel'),
-
-        ('work', 'Work'),
-
-        ('study', 'Study'),
-
-        ('personal', 'Personal'),
+        ("travel", "Travel"),
+        ("work", "Work"),
+        ("study", "Study"),
+        ("personal", "Personal"),
     ]
 
-    user = models.OneToOneField(
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
 
-        User,
-
-        on_delete=models.CASCADE,
-
-        related_name='profile'
+    language_native = models.ForeignKey(
+        Language,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="native_users",
     )
 
-    current_language = models.ForeignKey(
-
+    language_learning = models.ForeignKey(
         Language,
-
         on_delete=models.SET_NULL,
-
         null=True,
-
-        blank=True
+        blank=True,
+        related_name="learning_users",
     )
 
     learning_goal = models.CharField(
-
-        max_length=20,
-
-        choices=GOAL_CHOICES,
-
-        null=True,
-
-        blank=True
+        max_length=20, choices=GOAL_CHOICES, null=True, blank=True
     )
 
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
 
-    updated_at = models.DateTimeField(
-        auto_now=True
-    )
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
 

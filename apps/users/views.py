@@ -12,14 +12,14 @@ from .forms import RegisterForm
 from django.contrib.auth.views import LoginView
 from .forms import LoginForm
 
-
 # ==========================================
 # REGISTER
 # ==========================================
 
+
 def register_view(request):
 
-    if request.method == 'POST':
+    if request.method == "POST":
 
         form = RegisterForm(request.POST)
 
@@ -27,108 +27,73 @@ def register_view(request):
 
             user = form.save()
 
-            login(
-                request,
-                user,
-                backend='apps.users.backends.EmailOrUsernameBackend'
-            )
+            login(request, user, backend="apps.users.backends.EmailOrUsernameBackend")
 
-            return redirect(
-                '/onboarding/language/'
-            )
+            return redirect("/onboarding/language/")
 
     else:
 
         form = RegisterForm()
 
-    return render(
-
-        request,
-
-        'registration/register.html',
-
-        {
-            'form': form
-        }
-    )
+    return render(request, "registration/register.html", {"form": form})
 
 
 # ==========================================
 # LANGUAGE
 # ==========================================
 
+
 @login_required
 def language_view(request):
 
-    languages = Language.objects.filter(
-        is_active=True
-    )
+    languages = Language.objects.filter(is_active=True)
 
-    return render(
-
-        request,
-
-        'onboarding/language.html',
-
-        {
-            'languages': languages
-        }
-    )
+    return render(request, "onboarding/language.html", {"languages": languages})
 
 
 # ==========================================
 # SAVE LANGUAGE
 # ==========================================
 
+
 @login_required
 @require_POST
 def save_language(request):
 
-    code = request.POST.get(
-        'language'
-    )
+    code = request.POST.get("language")
 
-    language = Language.objects.get(
-        code=code
-    )
+    language = Language.objects.get(code=code)
 
     profile = request.user.profile
 
-    profile.current_language = language
+    profile.language_learning = language
 
     profile.save()
 
-    return redirect(
-        '/onboarding/goal/'
-    )
+    return redirect("/onboarding/goal/")
 
 
 # ==========================================
 # GOAL
 # ==========================================
 
+
 @login_required
 def goal_view(request):
 
-    return render(
-
-        request,
-
-        'onboarding/goal.html'
-    )
+    return render(request, "onboarding/goal.html")
 
 
 # ==========================================
 # SAVE GOAL
 # ==========================================
 
+
 @login_required
 @require_POST
 def save_goal(request):
 
-    goal = request.POST.get(
-        'goal'
-    )
+    goal = request.POST.get("goal")
 
     profile = request.user.profile
 
@@ -136,45 +101,38 @@ def save_goal(request):
 
     profile.save()
 
-    return redirect(
-        '/explore/'
-    )
+    return redirect("/explore/")
 
 
 # ==========================================
 # API LANGUAGES
 # ==========================================
 
+
 def language_list(request):
 
-    languages = Language.objects.filter(
-        is_active=True
-    )
+    languages = Language.objects.filter(is_active=True)
 
     data = []
 
     for language in languages:
 
-        data.append({
+        data.append(
+            {
+                "id": language.id,
+                "code": language.code,
+                "name": language.name,
+                "flag": language.flag,
+            }
+        )
 
-            'id': language.id,
-
-            'code': language.code,
-
-            'name': language.name,
-
-            'flag': language.flag,
-        })
-
-    return JsonResponse(
-        data,
-        safe=False
-    )
+    return JsonResponse(data, safe=False)
 
 
 # ==========================================
 # CHANGE LANGUAGE
 # ==========================================
+
 
 @login_required
 @require_POST
@@ -182,34 +140,23 @@ def change_language(request):
 
     import json
 
-    data = json.loads(
-        request.body
-    )
+    data = json.loads(request.body)
 
-    code = data.get(
-        'language'
-    )
+    code = data.get("language")
 
-    language = Language.objects.get(
-        code=code
-    )
+    language = Language.objects.get(code=code)
 
     profile = request.user.profile
 
-    profile.current_language = language
+    profile.language_learning = language
 
     profile.save()
 
-    return JsonResponse({
-
-        'success': True,
-
-        'language': language.code
-    })
+    return JsonResponse({"success": True, "language": language.code})
 
 
 class CustomLoginView(LoginView):
 
-    template_name = 'registration/login.html'
+    template_name = "registration/login.html"
 
     authentication_form = LoginForm

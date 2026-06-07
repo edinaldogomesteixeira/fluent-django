@@ -1,63 +1,34 @@
 from django.db import models
 from apps.users.models import Language
 
-from apps.subtitles.models import (
-    SubtitleSegment
-)
+from apps.subtitles.models import SubtitleSegment
 
 
 class VocabularyWord(models.Model):
-    
+
     language = models.ForeignKey(
-
         Language,
-
         on_delete=models.CASCADE,
-
-        related_name='vocabulary_words',
-
+        related_name="vocabulary_words",
         null=True,
-
-        blank=True
-    )
-
-    word = models.CharField(
-        max_length=255
-    )
-
-    normalized_word = models.CharField(
-        max_length=255,
-        db_index=True
-    )
-
-    translation = models.CharField(
-        max_length=255,
         blank=True,
-        null=True
     )
 
-    ipa = models.CharField(
-        max_length=255,
-        blank=True,
-        null=True
-    )
+    word = models.CharField(max_length=255)
 
-    frequency_rank = models.IntegerField(
-        default=0
-    )
+    normalized_word = models.CharField(max_length=255, db_index=True)
 
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
+    ipa = models.CharField(max_length=255, blank=True, null=True)
+
+    frequency_rank = models.IntegerField(default=0)
+
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
 
-        ordering = ['word']
-        
-        unique_together = (
-            'language',
-            'normalized_word'
-        )
+        ordering = ["word"]
+
+        unique_together = ("language", "normalized_word")
 
     def __str__(self):
 
@@ -67,129 +38,95 @@ class VocabularyWord(models.Model):
 class SubtitleWord(models.Model):
 
     segment = models.ForeignKey(
-
-        SubtitleSegment,
-
-        on_delete=models.CASCADE,
-
-        related_name='subtitle_words'
+        SubtitleSegment, on_delete=models.CASCADE, related_name="subtitle_words"
     )
 
     vocabulary_word = models.ForeignKey(
-
-        VocabularyWord,
-
-        on_delete=models.CASCADE,
-
-        related_name='subtitle_words'
+        VocabularyWord, on_delete=models.CASCADE, related_name="subtitle_words"
     )
 
-    original_word = models.CharField(
-        max_length=255
-    )
+    original_word = models.CharField(max_length=255)
 
-    position = models.IntegerField(
-        default=0
-    )
+    position = models.IntegerField(default=0)
 
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
 
-        ordering = [
+        ordering = ["segment", "position"]
 
-            'segment',
-            'position'
-        ]
-
-        unique_together = (
-
-            'segment',
-            'position'
-        )
+        unique_together = ("segment", "position")
 
     def __str__(self):
 
-        return (
+        return f"{self.original_word} " f"({self.segment.id})"
 
-            f'{self.original_word} '
-            f'({self.segment.id})'
-        )
 
 from django.contrib.auth.models import User
+
+
 class UserVocabulary(models.Model):
 
     KNOWLEDGE_LEVELS = [
-
-        (1, 'New'),
-
-        (2, 'Recognizing'),
-
-        (3, 'Learning'),
-
-        (4, 'Known'),
-
-        (5, 'Mastered'),
+        (1, "New"),
+        (2, "Recognizing"),
+        (3, "Learning"),
+        (4, "Known"),
+        (5, "Mastered"),
     ]
 
     user = models.ForeignKey(
-
-        User,
-
-        on_delete=models.CASCADE,
-
-        related_name='user_vocabulary'
+        User, on_delete=models.CASCADE, related_name="user_vocabulary"
     )
 
     vocabulary_word = models.ForeignKey(
-
-        VocabularyWord,
-
-        on_delete=models.CASCADE,
-
-        related_name='user_data'
+        VocabularyWord, on_delete=models.CASCADE, related_name="user_data"
     )
 
-    knowledge_level = models.IntegerField(
+    knowledge_level = models.IntegerField(choices=KNOWLEDGE_LEVELS, default=1)
 
-        choices=KNOWLEDGE_LEVELS,
+    review_count = models.IntegerField(default=0)
 
-        default=1
-    )
+    last_reviewed_at = models.DateTimeField(blank=True, null=True)
 
-    review_count = models.IntegerField(
-        default=0
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
 
-    last_reviewed_at = models.DateTimeField(
-
-        blank=True,
-
-        null=True
-    )
-
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
-
-    updated_at = models.DateTimeField(
-        auto_now=True
-    )
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
 
-        unique_together = (
-            'user',
-            'vocabulary_word'
-        )
+        unique_together = ("user", "vocabulary_word")
 
     def __str__(self):
 
         return (
-
-            f'{self.user.username} - '
-            f'{self.vocabulary_word.word} '
-            f'({self.knowledge_level})'
+            f"{self.user.username} - "
+            f"{self.vocabulary_word.word} "
+            f"({self.knowledge_level})"
         )
+
+
+class VocabularyTranslation(models.Model):
+
+    vocabulary_word = models.ForeignKey(
+        VocabularyWord, on_delete=models.CASCADE, related_name="translations"
+    )
+
+    language = models.ForeignKey(
+        Language, on_delete=models.CASCADE, related_name="vocabulary_translations"
+    )
+
+    translation = models.CharField(max_length=255)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+
+        unique_together = (
+            "vocabulary_word",
+            "language",
+        )
+
+    def __str__(self):
+
+        return f"{self.vocabulary_word.word} -> " f"{self.language.code}"

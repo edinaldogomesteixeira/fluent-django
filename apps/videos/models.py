@@ -50,6 +50,10 @@ class Video(models.Model):
 
         ('uploading', 'Uploading'),
 
+        ('transcription_pending', 'Transcription Pending'),
+
+        ('transcribing', 'Transcribing'),
+
         ('ready', 'Ready'),
 
         ('error', 'Error'),
@@ -136,7 +140,7 @@ class Video(models.Model):
     )
 
     status = models.CharField(
-        max_length=20,
+        max_length=30,
         choices=STATUS_CHOICES,
         default='pending'
     )
