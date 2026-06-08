@@ -99,6 +99,8 @@ async function loadExplorePage() {
         'mainContent'
     ).innerHTML = html;
 
+    setupMobileMenu();
+
     setActiveSidebar(
         'explore'
     );
@@ -2029,7 +2031,7 @@ async function openDeckMenu() {
     if (newDeckOption) {
 
         newDeckOption.onclick =
-            function() {
+            function () {
 
                 document
                     .getElementById(
@@ -2059,7 +2061,7 @@ async function openDeckMenu() {
     ).forEach(item => {
 
         item.onclick =
-            async function() {
+            async function () {
 
                 const deckId =
                     Number(
@@ -2217,7 +2219,7 @@ async function createDeck() {
 
     const wordIds =
         getSelectedWordIds();
-    
+
     let result = {
         created: 0
     };
@@ -2280,14 +2282,14 @@ function initializeDeckModal() {
                     );
             }
         );
-    
+
     document
         .getElementById(
             'newDeckName'
         )
         ?.addEventListener(
             'keydown',
-            async function(event) {
+            async function (event) {
 
                 if (
                     event.key === 'Enter'

@@ -1,0 +1,186 @@
+/* ======================================
+   MOBILE
+====================================== */
+
+.mobile-menu-button {
+    display: none;
+}
+
+@media (max-width: 768px) {
+
+    /* APP */
+
+    .app-body {
+        display: block;
+    }
+
+    .main-content {
+        padding: 16px;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+
+        display: block;
+
+        position: fixed;
+
+        top: 64px;
+
+        left: -260px;
+
+        width: 240px;
+
+        height: calc(100vh - 64px);
+
+        background: white;
+
+        z-index: 9999;
+
+        transition: .3s ease;
+
+        box-shadow:
+            0 10px 30px rgba(0,0,0,.15);
+    }
+
+    .sidebar.open {
+
+        left: 0;
+    }
+
+    /* MENU BUTTON */
+
+    .mobile-menu-button {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        width: 44px;
+
+        height: 44px;
+
+        border: none;
+
+        border-radius: 12px;
+
+        background: #f3f4f6;
+
+        cursor: pointer;
+
+        margin-right: 12px;
+
+        flex-shrink: 0;
+    }
+
+    /* TOPBAR */
+
+    .topbar {
+
+        height: 64px;
+
+        padding: 0 12px;
+    }
+
+    .topbar-left {
+
+        flex: 1;
+
+        min-width: 0;
+    }
+
+    .logo {
+
+        font-size: 24px;
+    }
+
+    .search-area {
+
+        width: 100%;
+
+        max-width: none;
+
+        min-width: 0;
+
+        height: 46px;
+    }
+
+    .search-input {
+
+        font-size: 14px;
+    }
+
+    .topbar-stats,
+    .language-selector,
+    .user-selector {
+
+        display: none;
+    }
+
+    .import-video-button {
+
+        width: 44px;
+
+        height: 44px;
+
+        padding: 0;
+
+        justify-content: center;
+    }
+
+    .import-video-button span {
+
+        display: none;
+    }
+
+    /* TITLES */
+
+    .page-title {
+
+        font-size: 34px;
+
+        margin-bottom: 24px;
+    }
+
+    .category-title {
+
+        font-size: 22px;
+    }
+
+    .category {
+
+        margin-bottom: 40px;
+    }
+
+    /* CARDS */
+
+    .video-row {
+
+        gap: 12px;
+    }
+
+    .video-card {
+
+        width: 220px;
+
+        min-width: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .video-card {
+
+        width: 100%;
+
+        min-width: 100%;
+    }
+
+    .search-input::placeholder {
+
+        content: "Search...";
+    }
+}
