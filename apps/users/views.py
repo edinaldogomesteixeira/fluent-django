@@ -128,6 +128,23 @@ def language_list(request):
 
     return JsonResponse(data, safe=False)
 
+# ==========================================
+# API USER Profile
+# ==========================================
+
+@login_required
+def user_profile_info(request):
+
+    return JsonResponse(
+        {
+            "native_language":
+                request.user.profile.language_native.name,
+
+            "learning_language":
+                request.user.profile.language_learning.name,
+        }
+    )
+
 
 # ==========================================
 # CHANGE LANGUAGE

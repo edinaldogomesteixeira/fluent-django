@@ -8,73 +8,26 @@ from .views import (
     save_language,
     change_language,
     language_list,
-    CustomLoginView
+    user_profile_info,
+    CustomLoginView,
 )
 
 from django.contrib.auth.views import LogoutView
 
-
 urlpatterns = [
-
     # LOGIN
-
-    path(
-        'accounts/login/',
-        CustomLoginView.as_view(),
-        name='login'
-    ),
-
-    path(
-        'accounts/logout/',
-        LogoutView.as_view(),
-        name='logout'
-    ),
-
+    path("accounts/login/", CustomLoginView.as_view(), name="login"),
+    path("accounts/logout/", LogoutView.as_view(), name="logout"),
     # REGISTRO
-
-    path(
-        'register/',
-        register_view,
-        name='register'
-    ),
-
+    path("register/", register_view, name="register"),
     # ONBOARDING
-
-    path(
-        'onboarding/language/',
-        language_view,
-        name='language'
-    ),
-
-    path(
-        'onboarding/save-language/',
-        save_language,
-        name='save_language'
-    ),
-
-    path(
-        'onboarding/goal/',
-        goal_view,
-        name='goal'
-    ),
-
-    path(
-        'onboarding/save-goal/',
-        save_goal,
-        name='save_goal'
-    ),
-
+    path("onboarding/language/", language_view, name="language"),
+    path("onboarding/save-language/", save_language, name="save_language"),
+    path("onboarding/goal/", goal_view, name="goal"),
+    path("onboarding/save-goal/", save_goal, name="save_goal"),
     # APIs
-
-    path(
-        'api/languages/list/',
-        language_list,
-        name='language_list'
-    ),
-
-    path(
-        'api/languages/change-language/',
-        change_language,
-        name='change_language'
-    ),
+    path("api/languages/list/", language_list, name="language_list"),
+    path("api/languages/user_profile/", user_profile_info, name="user_profile_info"),
+    path("api/languages/change-language/", change_language, name="change_language"),
+    
 ]

@@ -83,6 +83,12 @@ class UserVocabulary(models.Model):
         VocabularyWord, on_delete=models.CASCADE, related_name="user_data"
     )
 
+    language = models.ForeignKey(
+        Language,
+        on_delete=models.CASCADE,
+        related_name="user_vocabulary",
+    )
+
     knowledge_level = models.IntegerField(choices=KNOWLEDGE_LEVELS, default=1)
 
     review_count = models.IntegerField(default=0)
@@ -95,7 +101,7 @@ class UserVocabulary(models.Model):
 
     class Meta:
 
-        unique_together = ("user", "vocabulary_word")
+        unique_together = ("user", "vocabulary_word","language",)
 
     def __str__(self):
 

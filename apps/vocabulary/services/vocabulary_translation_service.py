@@ -49,10 +49,12 @@ def get_translation(
 
         return ""
 
-    VocabularyTranslation.objects.create(
+    obj, created = VocabularyTranslation.objects.get_or_create(
         vocabulary_word=vocabulary_word,
         language=target_language,
-        translation=translation,
+        defaults={
+            "translation": translation,
+        },
     )
 
-    return translation
+    return obj.translation

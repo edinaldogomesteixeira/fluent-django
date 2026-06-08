@@ -7,12 +7,10 @@ from django.http import JsonResponse
 from apps.vocabulary.models import VocabularyWord, UserVocabulary
 from apps.vocabulary.services.vocabulary_translation_service import get_translation
 
-from apps.vocabulary.models import (
-    SubtitleWord,
-    VocabularyTranslation,
-)
+from apps.vocabulary.models import SubtitleWord
 
 
+@login_required
 def vocabulary_detail(request, word):
 
     normalized = word.lower().strip()
@@ -26,11 +24,13 @@ def vocabulary_detail(request, word):
             normalized_word=normalized,
         )
 
-        user_vocab = UserVocabulary.objects.filter(
-            user=request.user, vocabulary_word=vocabulary
-        ).first()
-
         target_language = request.user.profile.language_native
+
+        user_vocab = UserVocabulary.objects.filter(
+            user=request.user,
+            vocabulary_word=vocabulary,
+            language=target_language,
+        ).first()
 
         translation = get_translation(vocabulary, target_language)
 
@@ -42,8 +42,13 @@ def vocabulary_detail(request, word):
 
         else:
 
-            UserVocabulary.objects.create(
-                user=request.user, vocabulary_word=vocabulary, knowledge_level=1
+            UserVocabulary.objects.get_or_create(
+                user=request.user,
+                vocabulary_word=vocabulary,
+                language=target_language,
+                defaults={
+                    "knowledge_level": 1,
+                },
             )
 
         data = {
@@ -86,8 +91,12 @@ def delete_user_vocabulary(request):
             language=language_learning, word__iexact=word
         )
 
+        target_language = request.user.profile.language_native
+
         UserVocabulary.objects.filter(
-            user=request.user, vocabulary_word=vocabulary_word
+            user=request.user,
+            vocabulary_word=vocabulary_word,
+            language=target_language,
         ).delete()
 
         return JsonResponse({"success": True})
@@ -102,7 +111,6 @@ def delete_user_vocabulary(request):
 def save_vocabulary_level(request):
 
     if request.method != "POST":
-
         return JsonResponse({"error": "POST required"}, status=400)
 
     data = json.loads(request.body)
@@ -123,8 +131,15 @@ def save_vocabulary_level(request):
 
         return JsonResponse({"error": "Word not found"}, status=404)
 
+    target_language = request.user.profile.language_native
+
     user_vocab, created = UserVocabulary.objects.get_or_create(
-        user=request.user, vocabulary_word=vocabulary_word
+        user=request.user,
+        vocabulary_word=vocabulary_word,
+        language=target_language,
+        defaults={
+            "knowledge_level": 1,
+        },
     )
 
     user_vocab.knowledge_level = knowledge_level
@@ -141,8 +156,12 @@ def user_vocabulary_levels(request):
 
     language_learning = request.user.profile.language_learning
 
+    target_language = request.user.profile.language_native
+
     vocabulary = UserVocabulary.objects.filter(
-        user=request.user, vocabulary_word__language=language_learning
+        user=request.user,
+        vocabulary_word__language=language_learning,
+        language=target_language,
     ).select_related("vocabulary_word")
 
     data = {}
@@ -156,9 +175,7 @@ def user_vocabulary_levels(request):
     return JsonResponse(data)
 
 
-from django.http import JsonResponse
-
-
+@login_required
 def video_vocabulary(request, video_id):
 
     words = SubtitleWord.objects.filter(segment__video_id=video_id).select_related(
@@ -177,22 +194,18 @@ def video_vocabulary(request, video_id):
 
             continue
 
-        translation_obj = VocabularyTranslation.objects.filter(
-            vocabulary_word=item.vocabulary_word,
-            language=target_language,
-        ).first()
-
-        translation = ""
-
-        if translation_obj:
-
-            translation = translation_obj.translation
+        translation = get_translation(
+            item.vocabulary_word,
+            target_language,
+        )
 
         data[normalized] = {
+            "id": item.vocabulary_word.id,
             "word": item.vocabulary_word.word,
             "translation": translation,
             "ipa": item.vocabulary_word.ipa,
             "frequency_rank": item.vocabulary_word.frequency_rank,
+            "example": item.segment.text,
         }
 
     return JsonResponse(data)

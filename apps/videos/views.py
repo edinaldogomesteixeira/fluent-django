@@ -6,8 +6,15 @@ from django.shortcuts import render, get_object_or_404
 from .models import Video, Category
 from apps.users.models import UserProfile
 
+from apps.flashcards.services.flashcard_service import (
+    ensure_default_decks,
+)
+
 
 def video_list(request):
+
+    if request.user.is_authenticated:
+        ensure_default_decks(request.user)
 
     if request.user.is_authenticated and request.user.profile.language_learning:
 
@@ -35,6 +42,9 @@ def video_list(request):
                 "youtubeId": video.youtube_id,
                 "hls": video.hls,
                 "subtitles": video.subtitles,
+                # NOVO
+                "language_name": (video.language.name if video.language else ""),
+                "language_code": (video.language.code if video.language else ""),
                 "categories": [
                     {
                         "name": category.name,
@@ -338,7 +348,7 @@ def worker_save_segments(request, video_id):
             video.save(update_fields=["language"])
 
         target_language = Language.objects.get(code="de")
-        #target_language = request.user.profile.language_native
+        # target_language = request.user.profile.language_native
 
         total_words = import_vocabulary(video)
 

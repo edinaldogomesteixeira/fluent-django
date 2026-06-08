@@ -45,11 +45,29 @@
 
         <div class="video-tabs">
 
-            <button
-                class="tab-button active"
-                data-tab="dialogue">
-                Dialogue
-            </button>
+            <div class="dialogue-tab-container">
+
+                <button
+                    class="tab-button active"
+                    data-tab="dialogue"
+                >
+                    Dialogue
+                </button>
+
+                <button
+                    id="dialogueOptionsButton"
+                    class="dialogue-options-button"
+                >
+                    ▼
+                </button>
+
+                <div
+                    id="dialogueOptionsMenu"
+                    class="dialogue-options-menu"
+                >
+                </div>
+
+            </div>
 
             <button
                 class="tab-button"
@@ -96,6 +114,38 @@
         <div
             id="vocabularyTab"
             class="tab-content">
+
+            <div class="content-wrapper">
+
+                <div class="vocab-toolbar">
+
+                    <label class="select-all-container">
+
+                        <input
+                            type="checkbox"
+                            id="selectAllVocabulary"
+                        >
+
+                        <span>
+                            Add All
+                        </span>
+
+                    </label>
+
+                    <button
+                        id="addToDeckButton">
+
+                        Add To ▼
+
+                    </button>
+                     <div
+                        id="deckMenu"
+                        class="deck-menu">
+                    </div>
+
+                </div>
+
+            </div>
 
             <div
                 id="videoVocabulary"
@@ -146,5 +196,43 @@
         </div>
 
     </div>
+    <div
+        id="newDeckModal"
+        class="new-deck-modal">
 
+        <div class="new-deck-content">
+
+            <h3>
+                Create Flashcard Deck
+            </h3>
+
+            <input
+                id="newDeckName"
+                type="text"
+                placeholder="Enter flashcard Deck name here"
+            >
+
+            <div class="new-deck-actions">
+
+                <button
+                    id="cancelDeckButton"
+                    class="cancel-button">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    id="createDeckButton"
+                    class="create-button">
+
+                    Create Flashcard Deck
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 </section>

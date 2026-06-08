@@ -61,6 +61,7 @@ class UserVocabularyAdmin(admin.ModelAdmin):
         "id",
         "user",
         "vocabulary_word",
+        "language",
         # 'vocabulary_normalized_word',
         "knowledge_level",
         "review_count",
