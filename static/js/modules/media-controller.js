@@ -1,6 +1,8 @@
 let hls = null;
 
+window.youtubePlayer = null;
 window.youtubeAPIReady = false;
+window.youtubeReady = false;
 
 function onYouTubeIframeAPIReady() {
 
@@ -123,7 +125,7 @@ const MediaController = {
 
         youtubeContainer.innerHTML =
             '<div id="youtubeIframe"></div>';
-        
+
         if (!window.youtubeAPIReady) {
 
             return;
@@ -146,7 +148,7 @@ const MediaController = {
                     controls: 1,
 
                     rel: 0,
-                    
+
                     enablejsapi: 1,
 
                     origin: window.location.origin
@@ -157,13 +159,13 @@ const MediaController = {
 
                     onReady: (event) => {
 
-                        youtubePlayer =
+                        window.youtubePlayer =
                             event.target;
 
                         window.youtubeReady =
                             true;
 
-                        youtubePlayer.playVideo();
+                        window.youtubePlayer.playVideo();
 
                     }
 
@@ -180,13 +182,12 @@ const MediaController = {
             this.currentProvider === 'youtube'
         ) {
 
-            youtubePlayer.playVideo();
+            window.youtubePlayer?.playVideo();
 
             return;
         }
 
         this.videoElement.play();
-
     },
 
     pause() {
@@ -194,12 +195,13 @@ const MediaController = {
         if (
             this.currentProvider === 'youtube'
         ) {
-            youtubePlayer.pauseVideo();
+
+            window.youtubePlayer?.pauseVideo();
+
             return;
         }
 
         this.videoElement.pause();
-
     },
 
     seek(time) {
@@ -208,7 +210,7 @@ const MediaController = {
             this.currentProvider === 'youtube'
         ) {
 
-            youtubePlayer.seekTo(
+            window.youtubePlayer?.seekTo(
                 time,
                 true
             );
@@ -218,7 +220,6 @@ const MediaController = {
 
         this.videoElement.currentTime =
             time;
-
     },
 
     getCurrentTime() {
@@ -227,33 +228,31 @@ const MediaController = {
             this.currentProvider === 'youtube'
         ) {
 
-
-            if (!youtubePlayer) {
+            if (!window.youtubePlayer) {
 
                 return 0;
             }
 
-
             try {
 
-                return youtubePlayer.getCurrentTime();
+                return window.youtubePlayer.getCurrentTime();
 
             } catch (error) {
 
                 return 0;
             }
-
         }
 
         return this.videoElement.currentTime;
-
     },
 
     destroy() {
- 
-        if (youtubePlayer) {
-            youtubePlayer.destroy();
-            youtubePlayer = null;
+
+        if (window.youtubePlayer) {
+
+            window.youtubePlayer.destroy();
+
+            window.youtubePlayer = null;
         }
 
         if (hls) {
@@ -275,7 +274,6 @@ const MediaController = {
         );
 
         this.videoElement.load();
-
     }
 
 

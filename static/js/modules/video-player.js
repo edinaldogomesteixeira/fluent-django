@@ -71,9 +71,7 @@ function setupPlayVideo(video) {
         youtubeContainer.style.display =
             'block';
 
-        createYouTubePlayer(
-            video.youtubeId
-        );
+        MediaController.load(video);
 
         return null;
     }
