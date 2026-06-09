@@ -99,7 +99,21 @@
 
     <!-- APP -->
 
+
+    <script src="/static/js/navigation.js"></script>
+    <script src="/static/js/modules/progress.js"></script>    
+    <script src="{% static 'js/modules/subtitles.js' %}"></script>
+    <script src="{% static 'js/modules/youtube-player.js' %}"></script>
+    <script src="{% static 'js/modules/dialogue.js' %}"></script>
+    <script src="{% static 'js/modules/decks.js' %}"></script>
+    <script src="{% static 'js/modules/video-player.js' %}"></script>
+    <script src="{% static 'js/modules/user.js' %}"></script>
     <script src="/static/js/router.js"></script>
+    <script src="/static/js/more-menu.js"></script>
+    <script src="/static/js/bottom-nav.js"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    
+
     <script src="/static/js/topbar.js"></script>
     
     <script src="/static/js/video-card.js"></script>
@@ -108,12 +122,15 @@
     <script src="/static/js/modal-controller.js"></script>
     <script src="/static/js/main.js"></script>
     <script src="/static/js/dashboard.js"></script>
-
     <script src="/static/js/import-video.js"></script>
 
-   
+
+    
 
 
+    {% include 'components/bottom_nav.html' %}
+    {% include 'components/more_menu.html' %}
+    
 </body>
 
 </html>

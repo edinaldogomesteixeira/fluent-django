@@ -1,0 +1,61 @@
+.more-menu {
+
+    position: fixed;
+
+    bottom: 90px;
+
+    right: 16px;
+
+    width: 220px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.15);
+
+    display: none;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    z-index: 10000;
+}
+
+.more-menu.show {
+
+    display: flex;
+}
+
+.more-menu button {
+
+    border: none;
+
+    background: white;
+
+    padding: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+.more-menu button:hover {
+
+    background: #f8fafc;
+}
+
+.more-menu i {
+
+    width: 20px;
+
+    color: #2563eb;
+}

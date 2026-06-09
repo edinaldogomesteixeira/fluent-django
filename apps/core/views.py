@@ -6,9 +6,8 @@ from django.contrib.auth.decorators import login_required
 # LANDING PAGE (PÚBLICA)
 # ==========================================
 
-
+@login_required
 def home(request):
-
     return render(request, "marketing/landing.html")
 
 
@@ -94,12 +93,31 @@ def topic_page(request):
     return render(request, "core/topic.html")
 
 
-# ==========================================
 # DASHBOARD
-# ==========================================
-
-
 @login_required
 def dashboard_page(request):
-
     return render(request, "core/dashboard.html")
+
+
+# LIBRARY
+@login_required
+def library_page(request):
+    return render(request, "core/library.html")
+
+
+# PROFILE
+@login_required
+def profile_page(request):
+    return render(request, "core/profile.html")
+
+@login_required
+def settings_page(request):
+    return render(request, "core/settings.html")
+
+@login_required
+def flashcards_page(request):
+    return render(request, "core/flashcards.html")
+
+@login_required
+def achievements_page(request):
+    return render(request, "core/achievements.html")

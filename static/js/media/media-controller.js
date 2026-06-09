@@ -1,5 +1,5 @@
 let hls = null;
-let youtubePlayer = null;
+
 window.youtubeAPIReady = false;
 
 function onYouTubeIframeAPIReady() {

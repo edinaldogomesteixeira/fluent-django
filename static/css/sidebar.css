@@ -63,3 +63,12 @@
 
     border-radius: 14px;
 }
+
+.menu-divider {
+
+    height: 1px;
+
+    background: #e5e7eb;
+
+    margin: 16px 0;
+}

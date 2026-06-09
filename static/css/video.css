@@ -591,35 +591,72 @@
    RESPONSIVE
 ========================================= */
 
-@media (max-width: 900px) {
+@media (max-width:768px){
 
-    .video-header {
+    .video-header{
 
-        flex-direction: column;
+        flex-direction:column;
 
-        align-items: flex-start;
+        align-items:center;
+
+        text-align:center;
     }
 
-    .video-thumb {
+    .video-cover{
 
-        width: 100%;
-
-        max-width: 420px;
-
-        height: auto;
+        width:100%;
     }
 
-    .dialogue-text {
+    .video-cover-image{
 
-        font-size: 16px;
+        width:100%;
+
+        height:auto;
     }
 
-    .vocab-header,
-    .vocab-row {
+    #videoTitle{
 
-        grid-template-columns: 1fr;
+        font-size:24px;
+    }
 
-        gap: 8px;
+    #videoDescription{
+
+        font-size:15px;
+    }
+
+        .video-tabs{
+
+        overflow-x:auto;
+
+        gap:20px;
+
+        white-space:nowrap;
+
+        scrollbar-width:none;
+    }
+
+    .video-tabs::-webkit-scrollbar{
+
+        display:none;
+    }
+
+        .vocab-row{
+
+        display:flex;
+
+        flex-direction:column;
+
+        gap:10px;
+    }
+
+    .vocab-word{
+
+        font-size:22px;
+    }
+
+    .vocab-example{
+
+        font-size:14px;
     }
 
 }
@@ -1034,3 +1071,172 @@
     margin: 0;
 }
 
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .video-page {
+
+        height: auto;
+
+        min-height: 100%;
+    }
+
+    .video-fixed-header {
+
+        padding: 0 4px;
+    }
+
+    .back-button {
+
+        font-size: 16px;
+
+        margin-bottom: 12px;
+
+        line-height: 1.5;
+    }
+
+    .video-header {
+
+        flex-direction: column;
+
+        align-items: center;
+
+        text-align: center;
+
+        gap: 18px;
+    }
+
+    .video-cover {
+
+        width: 100%;
+
+        max-width: 360px;
+    }
+
+    .video-cover-image {
+
+        width: 100%;
+
+        height: auto;
+
+        border-radius: 16px;
+    }
+
+    #videoTitle {
+
+        font-size: 24px;
+    }
+
+    #videoMeta {
+
+        font-size: 14px;
+    }
+
+    #videoDescription {
+
+        font-size: 15px;
+
+        line-height: 1.6;
+    }
+
+    .video-tabs {
+
+        overflow-x: auto;
+
+        white-space: nowrap;
+
+        gap: 24px;
+
+        padding-bottom: 8px;
+
+        scrollbar-width: none;
+    }
+
+    .video-tabs::-webkit-scrollbar {
+
+        display: none;
+    }
+
+    .tab-button {
+
+        flex-shrink: 0;
+    }
+
+    .dialogue-item {
+
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
+    .dialogue-text {
+
+        font-size: 16px;
+    }
+
+    .dialogue-translation {
+
+        font-size: 14px;
+    }
+
+    .vocab-toolbar {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 12px;
+    }
+
+    .select-all-container {
+
+        margin-right: 0;
+    }
+
+    .vocab-row {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .vocab-word-column {
+
+        min-width: auto;
+    }
+
+    .vocab-translation {
+
+        min-width: auto;
+    }
+
+    .vocab-word {
+
+        font-size: 22px;
+    }
+
+    .vocab-example {
+
+        font-size: 14px;
+    }
+
+    .deck-menu {
+
+        left: 0;
+
+        width: 100%;
+    }
+
+    .new-deck-content {
+
+        width: calc(100vw - 32px);
+
+        max-width: 500px;
+    }
+
+}
