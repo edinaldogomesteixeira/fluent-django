@@ -82,6 +82,31 @@ function renderDynamicCategories() {
 
 }
 
+function renderVideoGrid() {
+
+    const container =
+        document.getElementById(
+            'videoGrid'
+        );
+
+    if (!container) return;
+
+    container.innerHTML =
+
+        allData.videos
+
+            .map(video => {
+
+                return createVideoCard(
+                    video
+                );
+
+            })
+
+            .join('');
+
+}
+
 function renderSearchResults(
     videos
 ) {

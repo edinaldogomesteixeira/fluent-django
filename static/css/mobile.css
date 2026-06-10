@@ -8,17 +8,28 @@
 
 @media (max-width: 768px) {
 
-    /* APP */
+    /* ======================================
+       APP
+    ====================================== */
 
     .app-body {
-        display: block;
+
+        display: flex;
+
+        flex-direction: column;
     }
 
     .main-content {
+        overflow-y: visible;
+
         padding: 16px;
+
+        padding-bottom: 100px;
     }
 
-    /* SIDEBAR */
+    /* ======================================
+       SIDEBAR
+    ====================================== */
 
     .sidebar {
 
@@ -41,7 +52,7 @@
         transition: .3s ease;
 
         box-shadow:
-            0 10px 30px rgba(0,0,0,.15);
+            0 10px 30px rgba(0, 0, 0, .15);
     }
 
     .sidebar.open {
@@ -49,7 +60,9 @@
         left: 0;
     }
 
-    /* MENU BUTTON */
+    /* ======================================
+       MENU BUTTON
+    ====================================== */
 
     .mobile-menu-button {
 
@@ -76,7 +89,9 @@
         flex-shrink: 0;
     }
 
-    /* TOPBAR */
+    /* ======================================
+       TOPBAR
+    ====================================== */
 
     .topbar {
 
@@ -136,13 +151,13 @@
         display: none;
     }
 
-    /* TITLES */
+    /* ======================================
+       TITLES
+    ====================================== */
 
     .page-title {
 
-        font-size: 34px;
-
-        margin-bottom: 24px;
+        display: none;
     }
 
     .category-title {
@@ -155,32 +170,171 @@
         margin-bottom: 40px;
     }
 
-    /* CARDS */
+    /* ======================================
+       FILTER BAR
+    ====================================== */
+
+    .filter-bar {
+
+        display: flex;
+
+        gap: 10px;
+
+        overflow-x: auto;
+
+        overflow-y: hidden;
+
+        flex-wrap: nowrap;
+
+        padding-bottom: 4px;
+
+        scrollbar-width: none;
+    }
+
+    .filter-bar::-webkit-scrollbar {
+
+        display: none;
+    }
+
+    .filter-chip {
+
+        flex-shrink: 0;
+    }
+
+    /* ======================================
+       VIDEO GRID
+    ====================================== */
+
+    .video-grid {
+
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+    /* ======================================
+       VIDEO ROW
+    ====================================== */
 
     .video-row {
 
         gap: 12px;
     }
 
-    .video-card {
+    /* ======================================
+       VIDEO CARD
+    ====================================== */
+
+    /* ======================================
+    VIDEO CARD
+    ====================================== */
+
+    .video-grid .video-card {
+
+        width: 100%;
+
+        min-width: 0;
+
+        border-radius: 8px;
+
+        overflow: hidden;
+
+        background: #ffffff;
+
+        border: 1px solid #e5e7eb;
+
+        box-shadow: none;
+    }
+
+    .video-row .video-card {
 
         width: 220px;
 
         min-width: 220px;
+
+        border-radius: 8px;
+
+        overflow: hidden;
     }
-}
 
-@media (max-width: 480px) {
+    .video-grid .thumbnail {
 
-    .video-card {
+        border-radius: 0;
+
+        margin-bottom: 0;
+
+        box-shadow: none;
+    }
+
+    .video-grid .thumbnail img {
+
+        display: block;
 
         width: 100%;
 
-        min-width: 100%;
+        height: auto;
     }
+
+    .video-grid .video-title {
+
+        font-size: 16px;
+
+        font-weight: 600;
+
+        line-height: 1.35;
+
+        padding: 14px 14px 8px;
+    }
+
+    .video-grid .video-info {
+
+        padding: 0 14px 14px;
+
+        font-size: 13px;
+
+        color: #6b7280;
+    }
+
+    /* ======================================
+       DAILY GOAL
+    ====================================== */
+
+    .daily-goal-card {
+
+        margin-bottom: 20px;
+    }
+
+    /* ======================================
+       ACTIVE FILTERS
+    ====================================== */
+
+    .active-filters {
+
+        overflow-x: auto;
+
+        flex-wrap: nowrap;
+
+        scrollbar-width: none;
+    }
+
+    .active-filters::-webkit-scrollbar {
+
+        display: none;
+    }
+
+    .active-filter {
+
+        flex-shrink: 0;
+    }
+
+    /* ======================================
+       SEARCH
+    ====================================== */
 
     .search-input::placeholder {
 
-        content: "Search...";
+        color: #9ca3af;
     }
 }

@@ -6,15 +6,13 @@
 
 body {
 
-    font-family:
-        Inter,
-        Arial,
-        Helvetica,
-        sans-serif;
+    font-family: Inter, Arial, Helvetica, sans-serif;
 
     background: #f7f7f8;
 
     color: #111827;
 
-    overflow: hidden;
+    overflow-x: hidden;
+
+    overflow-y: auto;
 }

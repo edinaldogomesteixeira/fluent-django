@@ -44,6 +44,7 @@ async function loadExplorePage() {
     );
 
     loadVideos();
+   
 }
 
 async function loadTopicPage() {

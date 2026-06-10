@@ -1,0 +1,199 @@
+.daily-goal-card{
+
+    background:white;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:16px;
+
+    padding:16px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.daily-goal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:12px;
+
+}
+
+.daily-goal-title{
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+.daily-goal-minutes{
+
+    font-size:14px;
+
+    color:#6b7280;
+
+}
+
+.daily-goal-progress{
+
+    height:10px;
+
+    background:#e5e7eb;
+
+    border-radius:999px;
+
+    overflow:hidden;
+
+}
+
+.daily-goal-fill{
+
+    width:25%;
+
+    height:100%;
+
+    background:#22c55e;
+
+}
+
+.filter-bar {
+
+    display: flex;
+
+    gap: 10px;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+
+    flex-wrap: nowrap;
+
+    padding-bottom: 4px;
+
+    margin-bottom: 20px;
+
+    scrollbar-width: none;
+}
+
+.filter-bar::-webkit-scrollbar {
+
+    display: none;
+}
+
+.filter-chip {
+
+    flex-shrink: 0;
+
+    height: 44px;
+
+    padding: 0 18px;
+
+    border-radius: 999px;
+
+    border: 1px solid #e5e7eb;
+
+    background: white;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.filter-chip:hover {
+
+    background: #f8fafc;
+}
+
+.active-filters{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:24px;
+
+}
+
+.active-filter{
+
+    background:#e8f0ff;
+
+    color:#2563eb;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+/* ======================================
+   STICKY FILTERS
+====================================== */
+
+.filter-container {
+
+    position: sticky;
+
+    top: 80px;
+
+    z-index: 200;
+
+    background: #f7f7f8;
+
+    padding: 12px 0;
+
+    margin-bottom: 16px;
+}
+
+.video-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(
+                280px,
+                1fr
+            )
+        );
+
+    gap:24px;
+
+}
+
+.video-modal{
+    position:fixed;
+    inset:0;
+    opacity:0;
+    pointer-events:none;
+}
+
+@media (max-width:768px){
+
+    .video-grid{
+
+        grid-template-columns:
+            1fr;
+
+        gap:18px;
+
+    }
+
+}

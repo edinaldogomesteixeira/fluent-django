@@ -1,7 +1,7 @@
 function createVideoCard(video) {
 
     return `
-    
+
         <div
             class="video-card"
             data-video-id="${video.id}"
@@ -23,13 +23,31 @@ function createVideoCard(video) {
 
             </div>
 
-            <h3 class="video-title">
-                ${video.title}
-            </h3>
+            <div class="video-card-body">
 
-            <p class="video-info">
-                ${video.level} • ${video.words} Words
-            </p>
+                <h3 class="video-title">
+
+                    ${video.title}
+
+                </h3>
+
+                <div class="video-meta">
+
+                    <span class="video-level">
+
+                        ${video.level}
+
+                    </span>
+
+                    <span class="video-words">
+
+                        ${video.words} Words
+
+                    </span>
+
+                </div>
+
+            </div>
 
         </div>
 

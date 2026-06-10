@@ -21,39 +21,6 @@ async function loadVideos() {
 
     const categories = {};
 
-    const continueResponse =
-
-        await fetch(
-
-            '/api/continue-watching/',
-
-            {
-
-                credentials: 'same-origin'
-            }
-        );
-
-    const continueWatching =
-
-        await continueResponse.json();
-
-    if (
-
-        continueWatching.length > 0
-
-    ) {
-
-        categories[
-            'continue-watching'
-        ] = {
-
-            name:
-                'Continue Watching',
-
-            videos:
-                continueWatching
-        };
-    }
 
     videos.forEach(video => {
 
@@ -78,7 +45,7 @@ async function loadVideos() {
             if (
 
                 !categories[
-                    category.slug
+                category.slug
                 ]
 
             ) {
@@ -103,7 +70,10 @@ async function loadVideos() {
 
     allData = {
 
-        categories
+        categories,
+
+        videos:
+            [...videoMap.values()]
     };
 
     /*
@@ -115,13 +85,15 @@ async function loadVideos() {
     if (
 
         document.getElementById(
-            'dynamicCategories'
+            'videoGrid'
         )
 
     ) {
 
-        renderDynamicCategories();
+        renderVideoGrid();
     }
+
+    renderVideoGrid();
 
     setupVideoClicks();
 
